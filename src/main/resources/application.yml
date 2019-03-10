@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+swallow:
+  muti-datasource:
+    open: false
+  admin-path: a
+  spring-session-open: false
+
+
+spring:
+  devtools:
+    add-properties: false
+    restart:
+      enabled: true
+  mvc:
+    static-path-pattern: /static/**
+    view:
+      prefix: /WEB-INF/view/
+  profiles:
+    active: local
+  freemarker:
+    request-context-attribute: req
+    suffix: .html
+    content-type: text/html
+    enabled: true
+    cache: false
+    template-loader-path: classpath:/WEB-INF/view
+    charset: UTF-8
+    settings:
+      number_format: '0.##'
+
+mybatis:
+  type-aliases-package: cn.swallow.springbootdemo.modular.**.entity
+  mapper-locations: classpath:mapper/**/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    root: info
+---
+
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://120.79.225.48:3306/spring_boot_demo?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=CTT
+    username: root
+    password: yanni623..
+    filters: wall,mergeStat
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+---
+
