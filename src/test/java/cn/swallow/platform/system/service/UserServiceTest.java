@@ -5,7 +5,7 @@ import cn.swallow.platform.core.shiro.ShiroKit;
 import cn.swallow.platform.core.util.GsonHelper;
 import cn.swallow.platform.modular.system.entity.User;
 import cn.swallow.platform.modular.system.service.UserService;
-import cn.swallow.platform.SpringBootDemoApplication;
+import cn.swallow.platform.SwallowffApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SpringBootDemoApplication.class)
+@SpringBootTest(classes = SwallowffApplication.class)
 public class UserServiceTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 

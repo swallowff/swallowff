@@ -12,7 +12,7 @@ public class BaseResp implements Serializable {
 
     private Integer code;
     private String message;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private Serializable data;
 
     public BaseResp (ResponseState respResponseState){
@@ -20,22 +20,22 @@ public class BaseResp implements Serializable {
         this.message = respResponseState.getMsg();
     }
 
-    public BaseResp putResp(AbstractState respState){
+    public BaseResp putState(AbstractState respState){
         this.code = respState.getCode();
         this.message = respState.getMsg();
         return this;
     }
 
     public BaseResp emptyData(){
-        return putResp(ResponseState.EMPTY_DATA);
+        return putState(ResponseState.EMPTY_DATA);
     }
 
     public BaseResp error(){
-        return putResp(ResponseState.SYSTEM_ERROR);
+        return putState(ResponseState.SYSTEM_ERROR);
     }
 
     public BaseResp success(){
-        return putResp(ResponseState.SUCCESS);
+        return putState(ResponseState.SUCCESS);
     }
 
     public static BaseResp newSuccess(){

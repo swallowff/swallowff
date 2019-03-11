@@ -1,10 +1,21 @@
 package cn.swallow.platform.core.constant.state;
 
 public enum ResponseState implements AbstractState {
+    /**
+     * 通用状态
+     */
     SUCCESS(200,"操作成功"),
     SYSTEM_ERROR(502,"系统错误"),
     UNKNOWN_ERROR(500,"未知的错误"),
-    EMPTY_DATA(400,"数据为空");
+    EMPTY_DATA(400,"数据为空"),
+
+    ILLEGAL_FORMAT_EMAIL(1000,"邮箱格式不合法"),
+    ILLEGAL_FORMAT_PHONE(1001,"手机号不合法"),
+    /**
+     * 用户管理
+     */
+
+    ;
 
     private Integer code;
 

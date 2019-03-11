@@ -1,6 +1,8 @@
 package cn.swallow.platform.modular.system.entity;
 
 import cn.swallow.platform.core.common.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -15,6 +17,7 @@ public class User extends BaseEntity<User> implements Serializable {
     private String password; //密码
     private String salt;    //md5密码盐值
     private String name;    //姓名
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date birthday;  //出生日期
     private Integer sex;    //性别
     private String email;   //电子邮箱

@@ -1,7 +1,7 @@
 package cn.swallow.platform.util;
 
 import cn.hutool.core.date.DateUtil;
-import cn.swallow.platform.SpringBootDemoApplication;
+import cn.swallow.platform.SwallowffApplication;
 import cn.swallow.platform.core.util.SpringContextHolder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Date;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SpringBootDemoApplication.class)
+@SpringBootTest(classes = SwallowffApplication.class)
 public class SpringContextHolderTest {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

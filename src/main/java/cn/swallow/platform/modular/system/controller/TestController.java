@@ -19,6 +19,11 @@ public class TestController {
         map.put("tittle","你好");
         map.put("tittle2","测试");
         model.addAllAttributes(map);
+        return "pages/index";
+    }
+
+    @RequestMapping(value = "muban")
+    public String muban(){
         return "index";
     }
 }
