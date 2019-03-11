@@ -4,7 +4,9 @@ server:
 swallow:
   muti-datasource:
     open: false
-  admin-path: a
+  path:
+    admin: admin
+    api: openApi
   spring-session-open: false
 
 

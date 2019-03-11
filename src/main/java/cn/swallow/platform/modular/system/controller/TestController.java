@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "${swallow.admin-path}/test")
+@RequestMapping(value = "${swallow.path.admin}/test")
 public class TestController {
 
     @RequestMapping(value = "index")

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * @create 2019/3/11
  */
 @Controller
-@RequestMapping(value = "openApi")
+@RequestMapping(value = "${swallow.path.api}")
 public class OpenApiController {
 
     @RequestMapping(value = "testapi")

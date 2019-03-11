@@ -24,7 +24,7 @@ public class LoginController extends BaseController {
      * 登录页面跳转
      * @return
      */
-    @RequestMapping(value = "${swallow.admin-path}/login",method = RequestMethod.GET)
+    @RequestMapping(value = "${swallow.path.admin}/login",method = RequestMethod.GET)
     public String login(Model model, HttpServletRequest request){
         //已登录,跳转至主页
         if (ShiroKit.isAuthenticated()){
@@ -34,7 +34,7 @@ public class LoginController extends BaseController {
         }
     }
 
-    @RequestMapping(value = "${swallow.admin-path}/login",method = RequestMethod.POST)
+    @RequestMapping(value = "${swallow.path.admin}/login",method = RequestMethod.POST)
     public String doLogin(@RequestParam(value = "account") String account,
                           @RequestParam(value = "password") String password, Boolean rememberme, RedirectAttributes redirectAttributes, Model model){
         Subject subject = ShiroKit.getSubject();

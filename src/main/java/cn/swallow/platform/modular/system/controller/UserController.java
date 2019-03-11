@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("${swallow.admin-path}/user")
+@RequestMapping("${swallow.path.admin}/user")
 public class UserController extends BaseController {
     @Autowired
     private UserService userService;

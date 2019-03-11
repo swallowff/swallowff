@@ -13,6 +13,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.Serializable;
 
+/**
+ * 在前后端分离的项目中需要使用shiro管理认证状态时需要继承DeaultWebSessionManager,重写
+ * getSessionId方法,并将其注入SpringContext中
+ * 注意: 重写的getSessionId方法需要兼容原始从Cookie中获取sessionId的模式
+ */
 public class MySessionManager extends DefaultWebSessionManager {
     private static final String AUTHORIZATION = "Authorization";
 
