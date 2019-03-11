@@ -3,10 +3,7 @@ package cn.swallow.platform.core.shiro;
 import cn.swallow.platform.core.shiro.service.UserAuthService;
 import cn.swallow.platform.core.shiro.service.impl.UserAuthServiceImpl;
 import cn.swallow.platform.modular.system.entity.User;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -27,6 +24,9 @@ public class ShiroDBRealm extends AuthorizingRealm {
         UserAuthService userAuthService = UserAuthServiceImpl.me();
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         User user = userAuthService.user(token.getUsername());
+        if (null == user){
+            throw new UnknownAccountException("用户名不存在");
+        }
         ShiroUser shiroUser = ShiroUser.fromSysUser(user);
         return userAuthService.info(shiroUser,user,super.getName());
     }

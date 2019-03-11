@@ -28,6 +28,10 @@ public class ShiroKit {
         return SecurityUtils.getSubject();
     }
 
+    public static Boolean isAuthenticated(){
+        return getSubject() != null && getSubject().isAuthenticated();
+    }
+
     public static Session getSession(){
         return getSubject().getSession();
     }

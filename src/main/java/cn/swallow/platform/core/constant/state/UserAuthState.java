@@ -2,7 +2,9 @@ package cn.swallow.platform.core.constant.state;
 
 public enum  UserAuthState implements AbstractState {
     REPEAT_ACCOUNT(900,"用户名重复"),
-    INCORRECT_CREDENTIALS(901,"密码错误")
+    INCORRECT_CREDENTIALS(901,"密码错误"),
+    UNKNOWN_ACCOUNT(902,"用户名不存在"),
+    LOGIN_FAIL(903,"登录失败"),
     ;
 
     private Integer code;

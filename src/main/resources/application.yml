@@ -17,6 +17,7 @@ spring:
     static-path-pattern: /static/**
     view:
       prefix: /WEB-INF/view/
+    ignore-default-model-on-redirect: false
   profiles:
     active: local
   freemarker:
