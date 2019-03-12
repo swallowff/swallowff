@@ -8,11 +8,39 @@ import java.util.Date;
 
 /**
  * 描述: test Entity类
- * @author  AUTHOR
- * @date  1,324,365,249,440,917,082
+ * @author  shenyu
+ * @date
  */
 
 public class TestTable extends BaseEntity<TestTable> implements Serializable {
+
+    private String name;
+    private String birthDay;
+    private String desc;
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBirthDay() {
+        return this.birthDay;
+    }
+
+    public void setBirthDay(String birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public String getDesc() {
+        return this.desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
 
 }
