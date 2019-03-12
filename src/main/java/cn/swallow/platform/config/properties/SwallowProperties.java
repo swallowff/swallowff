@@ -3,9 +3,12 @@ package cn.swallow.platform.config.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+
 @Component
 @ConfigurationProperties(prefix = SwallowProperties.PREFIX)
 public class SwallowProperties {
+    public static final String ROOT_PATH = new File("").getAbsolutePath();
     public static final String PREFIX = "swallow";
 
     private String adminPath;

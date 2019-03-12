@@ -1,7 +1,7 @@
 package cn.swallow.platform.core.code.generator;
 
-import cn.hutool.core.io.FileUtil;
 import cn.swallow.platform.SwallowffApplication;
+import cn.swallow.platform.core.code.config.CodeGenConfig;
 import cn.swallow.platform.core.code.entity.ColumnClass;
 import cn.swallow.platform.core.util.CommonUtil;
 import cn.swallow.platform.core.util.JdbcUtil;
@@ -31,25 +31,9 @@ import static javafx.css.StyleOrigin.AUTHOR;
 public class CodeGenerator {
     private String tableName;
     private String className;
-    private static final String JAVA_SUFFIX = ".java";
     private String projectPath = new File("").getAbsolutePath();
     private String tplBasePath = this.getClass().getResource("/WEB-INF/view/templates/gencode/").getPath();
     private String basePackage = SwallowffApplication.class.getPackage().getName();
-
-    private enum TplFile{
-        MAPPER("Mapper.ftl"),DAO("Dao.ftl"),Service("Service.ftl"),Controller("Controller.ftl"),Entity("Entity.ftl"),Dto("Dto.ftl");
-
-        private String name;
-
-        TplFile(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-    }
 
     private CodeGenerator() {
     }
@@ -111,7 +95,7 @@ public class CodeGenerator {
     }
 
     private void generateEntityFile(ResultSet resultSet,String targetPackage) throws Exception{
-        final String targetPath = projectPath + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + CommonUtil.packageToPath(basePackage + "." + targetPackage) + File.separator + className + JAVA_SUFFIX;
+        final String targetPath = projectPath + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + CommonUtil.packageToPath(basePackage + "." + targetPackage) + File.separator + className + CodeGenConfig.java_suffix;
         File targetFile = new File(targetPath);
         List<ColumnClass> columnClassList = new ArrayList<>();
         ColumnClass columnClass = null;
@@ -131,10 +115,10 @@ public class CodeGenerator {
         }
         Map<String,Object> dataMap = new HashMap<>();
         dataMap.put("entity_column",columnClassList);
-        generateFileByTemplate(TplFile.Entity,targetFile,targetPackage,dataMap);
+        generateFileByTemplate(CodeGenConfig.TplFile.Entity,targetFile,targetPackage,dataMap);
     }
 
-    private void generateFileByTemplate(TplFile tplFile,File file,String targetPackage,Map<String,Object> dataMap) throws Exception{
+    private void generateFileByTemplate(CodeGenConfig.TplFile tplFile,File file,String targetPackage,Map<String,Object> dataMap) throws Exception{
         Template template = FreeMarkerTemplateUtil.getTemplate(tplFile.getName());
         if (!file.exists()){
             System.out.println("文件不存在");
