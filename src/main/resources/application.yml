@@ -19,7 +19,7 @@ spring:
     static-path-pattern: /static/**
     view:
       prefix: /WEB-INF/view/
-    ignore-default-model-on-redirect: false
+
   profiles:
     active: local
   freemarker:
@@ -45,7 +45,7 @@ logging:
 ---
 
 spring:
-  profiles: local
+  profiles: prod
   datasource:
     url: jdbc:mysql://120.79.225.48:3306/spring_boot_demo?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=CTT
     username: root
@@ -56,3 +56,14 @@ spring:
 
 ---
 
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/swallow_test?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=CTT
+    username: root
+    password: yanni623..
+    filters: wall,mergeStat
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+---

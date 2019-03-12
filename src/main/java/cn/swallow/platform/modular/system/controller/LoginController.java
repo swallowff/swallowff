@@ -63,5 +63,13 @@ public class LoginController extends BaseController {
         return "index";
     }
 
+    /**
+     * 欢迎页
+     * @return
+     */
+    @RequestMapping(value = "welcome")
+    public String welcome(){
+        return "pages/welcome";
+    }
 
 }

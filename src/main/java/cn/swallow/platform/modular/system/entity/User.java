@@ -2,9 +2,7 @@ package cn.swallow.platform.modular.system.entity;
 
 import cn.swallow.platform.core.common.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
