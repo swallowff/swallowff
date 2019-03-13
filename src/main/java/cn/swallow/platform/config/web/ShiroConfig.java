@@ -141,7 +141,8 @@ public class ShiroConfig {
          */
         Map<String, String> hashMap = new LinkedHashMap<>();
         hashMap.put("/static/**", "anon");
-        hashMap.put("admin/test/**","anon");
+//        hashMap.put("/admin/test/**","anon");
+//        hashMap.put("/front","front");
         hashMap.put("/openApi/**", "anon");
         hashMap.put("/admin/login", "anon");
         hashMap.put("/global/sessionError", "anon");

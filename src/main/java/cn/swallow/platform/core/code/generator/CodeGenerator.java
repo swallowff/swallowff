@@ -1,6 +1,6 @@
 package cn.swallow.platform.core.code.generator;
 
-import cn.swallow.platform.SwallowffApplication;
+import cn.hutool.core.io.FileUtil;
 import cn.swallow.platform.core.code.config.CodeGenConfig;
 import cn.swallow.platform.core.code.entity.ColumnClass;
 import cn.swallow.platform.core.util.JdbcUtil;
@@ -10,7 +10,6 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StreamUtils;
 
 import java.io.*;
 import java.sql.Connection;
@@ -18,9 +17,6 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-
-import static com.alibaba.druid.sql.dialect.db2.ast.DB2Object.Constants.CURRENT_DATE;
-import static javafx.css.StyleOrigin.AUTHOR;
 
 /**
  * @author shenyu
@@ -35,10 +31,10 @@ public class CodeGenerator {
     private CodeGenerator() {
     }
 
-    public CodeGenerator(String tableName,String targetPackage){
+    public CodeGenerator(String tableName,String targetPackage,String className){
         this.tableName = tableName;
         this.targetPackage = targetPackage;
-        className = replaceUnderLineAndUpperCase(tableName);
+        this.className = className;
     }
 
     private Connection getConnection() throws SQLException{
@@ -87,7 +83,6 @@ public class CodeGenerator {
     }
 
     private void generateEntityFile(ResultSet resultSet) throws Exception{
-//        final String targetPath = projectPath + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + CommonUtil.packageToPath(basePackage + "." + targetPackage) + File.separator + className + CodeGenConfig.java_suffix;
         String targetPath = CodeGenConfig.getTargetPath2(targetPackage,CodeGenConfig.CodeGenType.Entity);
         File targetFile = new File(targetPath);
         List<ColumnClass> columnClassList = new ArrayList<>();
@@ -111,32 +106,20 @@ public class CodeGenerator {
         generateFileByTemplate(CodeGenConfig.CodeGenType.Entity,targetFile,targetPackage,dataMap);
     }
 
-    private void generateFileByTemplate(CodeGenConfig.CodeGenType entity,File dir,String targetPackage,Map<String,Object> dataMap){
+    private void generateFileByTemplate(CodeGenConfig.CodeGenType entity,File file,String targetPackage,Map<String,Object> dataMap){
         File targetFile = null;
         OutputStreamWriter osw = null;
         Writer out = null;
         FileOutputStream fos = null;
         try {
             Template template = FreeMarkerTemplateUtil.getTemplate(entity.getTplFileName());
-            if (!dir.exists()){
-    //            System.out.println("目录不存在");
-                throw new RuntimeException("target file is not exist "+dir.getAbsolutePath());
-            }else {
-                //文件存在,检查是否是目录
-                if (!dir.isDirectory()){
-                    //不是目录,抛出异常
-                    throw new RuntimeException("target file is not a directory");
-                }else {
-                    //是目录,则新建文件
-                    targetFile = new File(dir.getAbsolutePath()+File.separator+className+CodeGenConfig.java_suffix);
-                    if (targetFile.exists()){
-                        //已有文件,先删除
-                        targetFile.delete();
-                    }
-                    targetFile.createNewFile();
+            if (file.exists() && file.isDirectory()){
+                targetFile = new File(file.getAbsolutePath()+File.separator+className+CodeGenConfig.java_suffix);
+                if (targetFile.exists()){
+                    //已有文件,先删除
+                    targetFile.delete();
                 }
-            }
-            if (targetFile != null){
+                targetFile.createNewFile();
                 fos = new FileOutputStream(targetFile);
                 dataMap.put("table_name_small",tableName);
                 dataMap.put("class_name",className);
@@ -147,12 +130,13 @@ public class CodeGenerator {
                 osw = new OutputStreamWriter(fos ,"utf-8");
                 out = new BufferedWriter(osw,10240);
                 template.process(dataMap,out);
-
+            }else {
+                throw new FileNotFoundException(String.format("file is not exists or file is not a directory : {%s}",file.getAbsolutePath()));
             }
-        } catch (Exception e) {
-            StreamUtil.close(fos,out,osw);
-            targetFile.delete();
+        } catch (IOException e) {
             e.printStackTrace();
+        } catch (TemplateException e2){
+            e2.printStackTrace();
         } finally {
             StreamUtil.close(fos,out,osw);
         }

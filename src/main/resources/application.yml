@@ -21,7 +21,7 @@ spring:
       prefix: /WEB-INF/view/
 
   profiles:
-    active: prod
+    active: local
   freemarker:
     request-context-attribute: req
     suffix: .html

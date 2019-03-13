@@ -22,7 +22,7 @@ public class ShiroKit {
     /**
      * 循环次数
      */
-    public final static int hashIterations = 1024;
+    public final static int hashIterations = 2;
 
     public static Subject getSubject() {
         return SecurityUtils.getSubject();

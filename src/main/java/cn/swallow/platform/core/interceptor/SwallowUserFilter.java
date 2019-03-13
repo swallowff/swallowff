@@ -10,18 +10,17 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 使用该过滤器拦截ajax请求, 同时解决session超时的问题
+ */
 public class SwallowUserFilter extends AccessControlFilter {
 
     /**
-     * Returns <code>true</code> if the request is a
-     * {@link #isLoginRequest(javax.servlet.ServletRequest, javax.servlet.ServletResponse) loginRequest} or
-     * if the current {@link #getSubject(javax.servlet.ServletRequest, javax.servlet.ServletResponse) subject}
-     * is not <code>null</code>, <code>false</code> otherwise.
-     *
-     * @return <code>true</code> if the request is a
-     * {@link #isLoginRequest(javax.servlet.ServletRequest, javax.servlet.ServletResponse) loginRequest} or
-     * if the current {@link #getSubject(javax.servlet.ServletRequest, javax.servlet.ServletResponse) subject}
-     * is not <code>null</code>, <code>false</code> otherwise.
+     * 已登录或user存在的,放行
+     * @param request
+     * @param response
+     * @param mappedValue
+     * @return
      */
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         if (isLoginRequest(request, response)) {
@@ -34,10 +33,11 @@ public class SwallowUserFilter extends AccessControlFilter {
     }
 
     /**
-     * This default implementation simply calls
-     * {@link #saveRequestAndRedirectToLogin(javax.servlet.ServletRequest, javax.servlet.ServletResponse) saveRequestAndRedirectToLogin}
-     * and then immediately returns <code>false</code>, thereby preventing the chain from continuing so the redirect may
-     * execute.
+     * 未获取到subject时执行
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
      */
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = WebUtils.toHttp(request);

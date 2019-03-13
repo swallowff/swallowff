@@ -53,6 +53,13 @@ public class LoginController extends BaseController {
         return REDIRECT + "/";
     }
 
+    @RequestMapping(value = "${swallow.path.admin}/logout")
+    public String doLogout(){
+        Subject subject = ShiroKit.getSubject();
+        subject.logout();
+        return REDIRECT + "login";
+    }
+
     /**
      * 跳转到主页
      * @param model
@@ -72,4 +79,9 @@ public class LoginController extends BaseController {
         return "pages/welcome";
     }
 
+
+    @RequestMapping(value = "front")
+    public String front(){
+        return "index";
+    }
 }

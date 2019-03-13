@@ -22,7 +22,8 @@ public class CodeGeneratorTest {
     public void testGenerate(){
         String tableName = "test_table";
         String targetPackage = "cn.swallow.platform.modular.manage";
-        CodeGenerator codeGenerator = new CodeGenerator(tableName,targetPackage);
+        String className = "Article";
+        CodeGenerator codeGenerator = new CodeGenerator(tableName,targetPackage,className);
         try {
             codeGenerator.generate();
         } catch (Exception e) {
@@ -36,13 +37,13 @@ public class CodeGeneratorTest {
         String realPath = new File("").getAbsolutePath();
         String pathSeparator = File.pathSeparator;
         String separator = File.separator;
-        String classPath = new CodeGenerator("","").getClass().getResource("").getPath();
+//        String classPath = new CodeGenerator("","").getClass().getResource("").getPath();
         String basePackage = SwallowffApplication.class.getPackage().getName();
         logger.info("path: [{}]",path);
         logger.info("realPath: [{}]",realPath);
         logger.info("pathSeparator: [{}]",pathSeparator);
         logger.info("separator: [{}]",separator);
-        logger.info("diskPath: [{}]",classPath);
+//        logger.info("diskPath: [{}]",classPath);
         logger.info("basePackage: [{}]",basePackage);
     }
 
