@@ -4,24 +4,17 @@
 
     <sql id="baseColumns">
         a.id AS id,
-        a.avatar AS avatar,
-        a.account AS account,
-        a.password AS password,
-        a.salt AS salt,
+        a.sort AS sort,
         a.name AS name,
-        a.birthday AS birthday,
-        a.sex AS sex,
-        a.email AS email,
-        a.phone AS phone,
-        a.role_id AS roleId,
+        a.pid AS pid,
         a.dept_id AS deptId,
-        a.status AS status,
+        a.tips AS tips,
         a.create_time AS createTime,
         a.update_time AS updateTime,
         a.version AS version
     </sql>
 
-    <select id="selectById" resultType="cn.swallow.platform.modular.system.entity.User">
+    <select id="selectById" resultType="cn.swallow.platform.modular.system.entity.Role">
       SELECT
       <include refid="baseColumns"/>
       FROM sys_user a
@@ -30,28 +23,13 @@
       </where>
     </select>
 
-    <select id="findList" resultType="cn.swallow.platform.modular.system.entity.User">
+    <select id="findList" resultType="cn.swallow.platform.modular.system.entity.Role">
         SELECT
         <include refid="baseColumns"/>
-        FROM sys_user a
+        FROM sys_role a
         <where>
-            <if test="account != null and account != ''">
-              AND a.account = #{account}
-            </if>
-            <if test="account != null and account != ''">
-                AND a.name = #{name}
-            </if>
-            <if test="sex != null and sex != ''">
-                AND a.sex = #{sex}
-            </if>
-            <if test="email != null and email != ''">
-                AND a.email = #{email}
-            </if>
-            <if test="phone != null and phone != ''">
-                AND a.phone = #{phone}
-            </if>
-            <if test="status != null and status != ''">
-                AND a.status = #{status}
+            <if test="pid != null and pid != ''">
+              AND a.pid = #{pid}
             </if>
         </where>
         <choose>
@@ -65,34 +43,20 @@
     </select>
 
     <insert id="insert">
-        INSERT INTO sys_user(
-          avatar,
-          account,
-          password,
-          salt,
+        INSERT INTO sys_role(
+          sort,
           name,
-          birthday,
-          sex,
-          email,
-          phone,
-          role_id,
+          pid,
           dept_id,
-          status,
+          tips,
           update_time,
           create_time
         ) VALUES (
-          #{avatar},
-          #{account},
-          #{password},
-          #{salt},
+          #{sort},
           #{name},
-          #{birthday},
-          #{sex},
-          #{email},
-          #{phone},
-          #{roleId},
+          #{pid},
           #{deptId},
-          #{status},
+          #{tips},
           #{updateTime},
           #{createTime}
         )
@@ -100,20 +64,12 @@
 
     <update id="update">
         UPDATE sys_user SET
-          avatar = #{avatar},
-          account = #{account},
-          password = #{password},
-          salt = #{salt},
+          sort = #{sort},
           name = #{name},
-          birthday = #{birthday},
-          sex = #{sex},
-          email = #{email},
-          phone = #{phone},
-          role_id = #{roleId},
+          pid = #{pid},
           dept_id = #{deptId},
-          status = #{status},
-          update_time = #{updateTime},
-          create_time = #{createTime}
+          tips = #{tips},
+          update_time = #{updateTime}
           <where>
               id = #{id}
           </where>
@@ -122,44 +78,23 @@
     <update id="updateSelective">
         UPDATE sys_user
         <set>
-            <if test="avatar != null and avatar != ''">
-                avatar = #{avatar}
-            </if>
-            <if test="account != null and account != ''">
-                account = #{account}
-            </if>
-            <if test="password != null and password != ''">
-                password = #{password}
-            </if>
-            <if test="salt != null and salt != ''">
-                salt = #{salt}
+            <if test="sort != null and sort != ''">
+                sort = #{sort}
             </if>
             <if test="name != null and name != ''">
                 name = #{name}
             </if>
-            <if test="birthday != null and birthday != ''">
-                birthday = #{birthday}
-            </if>
-            <if test="sex != null and sex != ''">
-                sex = #{sex}
-            </if>
-            <if test="email != null and email != ''">
-                email = #{email}
-            </if>
-            <if test="phone != null and phone != ''">
-                phone = #{phone}
+            <if test="pid != null and pid != ''">
+                pid = #{pid}
             </if>
             <if test="deptId != null and deptId != ''">
                 dept_id = #{deptId}
             </if>
-            <if test="status != null and status != ''">
-                status = #{status}
+            <if test="tips != null and tips != ''">
+                tips = #{tips}
             </if>
             <if test="updateTime != null and updateTime != ''">
                 update_time = #{updateTime}
-            </if>
-            <if test="createTime != null and createTime != ''">
-                create_time = #{createTime}
             </if>
         </set>
         <where>

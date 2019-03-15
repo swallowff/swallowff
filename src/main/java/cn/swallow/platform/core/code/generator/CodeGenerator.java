@@ -1,10 +1,8 @@
 package cn.swallow.platform.core.code.generator;
 
-import cn.hutool.core.io.FileUtil;
 import cn.swallow.platform.core.code.config.CodeGenConfig;
 import cn.swallow.platform.core.code.entity.ColumnClass;
 import cn.swallow.platform.core.util.JdbcUtil;
-import cn.swallow.platform.core.util.SpringContextHolder;
 import cn.swallow.platform.core.util.StreamUtil;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -31,7 +29,7 @@ public class CodeGenerator {
     private CodeGenerator() {
     }
 
-    public CodeGenerator(String tableName,String targetPackage,String className){
+    public CodeGenerator(String tableName, String targetPackage, String className){
         this.tableName = tableName;
         this.targetPackage = targetPackage;
         this.className = className;
@@ -41,7 +39,14 @@ public class CodeGenerator {
         return JdbcUtil.getConnection();
     }
 
+    private void preGenerate(){
+        Optional.of(tableName).orElseThrow(IllegalStateException::new);
+        Optional.of(targetPackage).orElseThrow(IllegalStateException::new);
+        Optional.of(className).orElseThrow(IllegalStateException::new);
+    }
+
     public void generate() {
+        preGenerate();
         try {
             Connection connection = getConnection();
             DatabaseMetaData databaseMetaData = connection.getMetaData();
@@ -83,7 +88,7 @@ public class CodeGenerator {
     }
 
     private void generateEntityFile(ResultSet resultSet) throws Exception{
-        String targetPath = CodeGenConfig.getTargetPath2(targetPackage,CodeGenConfig.CodeGenType.Entity);
+        String targetPath = CodeGenConfig.getTargetPath(this.targetPackage,CodeGenConfig.CodeGenType.Entity);
         File targetFile = new File(targetPath);
         List<ColumnClass> columnClassList = new ArrayList<>();
         ColumnClass columnClass = null;
@@ -103,7 +108,7 @@ public class CodeGenerator {
         }
         Map<String,Object> dataMap = new HashMap<>();
         dataMap.put("table_columns",columnClassList);
-        generateFileByTemplate(CodeGenConfig.CodeGenType.Entity,targetFile,targetPackage,dataMap);
+        generateFileByTemplate(CodeGenConfig.CodeGenType.Entity,targetFile, this.targetPackage,dataMap);
     }
 
     private void generateFileByTemplate(CodeGenConfig.CodeGenType entity,File file,String targetPackage,Map<String,Object> dataMap){
@@ -161,9 +166,9 @@ public class CodeGenerator {
 
 
 
-    public static CodeGenerator me(){
-        return SpringContextHolder.getBean(CodeGenerator.class);
-    }
+//    public static CodeGenerator me(){
+//        return SpringContextHolder.getBean(CodeGenerator.class);
+//    }
 
     public String getTableName() {
         return tableName;

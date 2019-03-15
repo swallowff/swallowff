@@ -5,6 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.DefaultResourceLoader;
 
 import java.io.File;
+import java.util.Optional;
 
 @SpringBootTest
 public class FilePathTest {
@@ -29,5 +30,12 @@ public class FilePathTest {
 
         String path = resourceLoader.getResource("/cn").getFile().getAbsolutePath();
         System.out.println(path);
+    }
+
+    @Test
+    public void optionalTest(){
+        String input = null;
+        String result = Optional.ofNullable(input).orElse("2");
+        System.out.println(result);
     }
 }

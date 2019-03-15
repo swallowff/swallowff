@@ -6,6 +6,7 @@ import org.springframework.core.io.DefaultResourceLoader;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.zip.DataFormatException;
 
 /**
  * @author shenyu
@@ -19,29 +20,11 @@ public class CodeGenConfig {
     public static String author = "shenyu";
 
 
-    public static String getTargetPath2(String targetPackage,CodeGenType genType){
+    public static String getTargetPath(String targetPackage, CodeGenType genType) throws DataFormatException{
         StringBuilder sb = new StringBuilder();
         sb.append(PROJECT_PATH).append(File.separator).append("src").append(File.separator).append("main")
                 .append(File.separator).append("java").append(File.separator).append(convertPackageToPath(targetPackage)).append(File.separator).append(genType.packageName);
         return sb.toString();
-//        PROJECT_PATH + File.separator + "src" + File.separator + "main" + File.separator
-    }
-
-    public static String getTargetPath(String targetPackage,CodeGenType genType){
-        DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
-        String resourcePath = "";
-        try {
-            resourcePath = resourceLoader.getResource("/").getFile().getAbsolutePath();
-            if (genType == CodeGenType.MAPPER){
-                return resourcePath + File.separator + "mapper" + File.separator + "system" + File.separator;
-            }else {
-                return resourcePath + convertPackageToPath(targetPackage) ;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return "";
     }
 
     public static String getTplFilePath(CodeGenType type){
@@ -56,17 +39,23 @@ public class CodeGenConfig {
         return path;
     }
 
-    public static String convertPackageToPath(String packagePath){
+    public static String convertPackageToPath(String packagePath) throws DataFormatException {
         String[] strs = packagePath.split("\\u002E");
-        if (strs.length == 1){
-            return File.separator + packagePath + File.separator;
+        if (strs.length <= 0){
+            throw new DataFormatException("传入的包名有误");
+        }else {
+            if (strs.length == 1){
+                return File.separator + packagePath + File.separator;
+            }
+            StringBuilder sb = new StringBuilder();
+            for (String s : strs){
+                sb.append(File.separator).append(s);
+            }
+            sb.append(File.separator);
+            return sb.toString();
         }
-        StringBuilder sb = new StringBuilder();
-        for (String s : strs){
-            sb.append(File.separator).append(s);
-        }
-        sb.append(File.separator);
-        return sb.toString();
+
+
     }
 
     public enum CodeGenType{

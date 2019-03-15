@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class LoginController extends BaseController {
+public class AdminLoginController extends BaseController {
 
     /**
      * 登录页面跳转
@@ -28,9 +28,9 @@ public class LoginController extends BaseController {
     public String login(Model model, HttpServletRequest request){
         //已登录,跳转至主页
         if (ShiroKit.isAuthenticated()){
-            return REDIRECT + "/";
+            return REDIRECT + "/admin";
         } else {
-            return "login";
+            return "pages/admin/login";
         }
     }
 
@@ -42,46 +42,51 @@ public class LoginController extends BaseController {
             subject.login(new UsernamePasswordToken(account.trim(),password.trim(),rememberme == null ? false : rememberme));
         } catch (IncorrectCredentialsException e1){
             redirectAttributes.addFlashAttribute("tips", UserAuthState.INCORRECT_CREDENTIALS.getMsg());
-            return REDIRECT + "login";
+            return REDIRECT + "/admin/login";
         } catch (UnknownAccountException e2){
             redirectAttributes.addFlashAttribute("tips",UserAuthState.UNKNOWN_ACCOUNT.getMsg());
-            return REDIRECT + "login";
+            return REDIRECT + "/admin/login";
         } catch (AuthenticationException e3) {
             redirectAttributes.addFlashAttribute("tips",UserAuthState.LOGIN_FAIL.getMsg());
-            return REDIRECT + "login";
+            return REDIRECT + "/admin/login";
         }
-        return REDIRECT + "/";
+        return REDIRECT + "/admin";
     }
 
     @RequestMapping(value = "${swallow.path.admin}/logout")
     public String doLogout(){
         Subject subject = ShiroKit.getSubject();
         subject.logout();
-        return REDIRECT + "login";
+        return REDIRECT + "/admin/login";
+    }
+
+    @RequestMapping("/")
+    public String defaultPage(){
+        return "pages/blog/frontIndex";
+    }
+
+    @RequestMapping("front")
+    public String front(){
+        return "pages/blog/frontIndex";
     }
 
     /**
-     * 跳转到主页
+     * 跳转到后台管理主页
      * @param model
      * @return
      */
-    @RequestMapping("/")
+    @RequestMapping("admin")
     public String index(Model model){
-        return "index";
+        return "pages/admin/index";
     }
 
     /**
      * 欢迎页
      * @return
      */
-    @RequestMapping(value = "welcome")
+    @RequestMapping(value = "${swallow.path.admin}/welcome")
     public String welcome(){
-        return "pages/welcome";
+        return "pages/admin/welcome";
     }
 
-
-    @RequestMapping(value = "front")
-    public String front(){
-        return "index";
-    }
 }
