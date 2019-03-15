@@ -1,6 +1,6 @@
 package cn.swallow.platform.core.util;
 
-import cn.swallow.platform.core.common.exception.CoreExceptionEnum;
+import cn.swallow.platform.core.common.exception.constant.CoreExceptionEnum;
 import cn.swallow.platform.core.common.exception.ServiceException;
 
 import java.io.*;

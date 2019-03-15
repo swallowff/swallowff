@@ -1,16 +1,14 @@
 package cn.swallow.platform.core.aop;
 
-import cn.swallow.platform.core.common.exception.BizExceptionEnum;
+import cn.swallow.platform.core.common.exception.constant.BizExceptionEnum;
 import cn.swallow.platform.core.common.exception.InvalidKaptchaException;
 import cn.swallow.platform.core.common.exception.ServiceException;
 import cn.swallow.platform.core.common.log.LogManager;
 import cn.swallow.platform.core.common.log.factory.LogTaskFactory;
-import cn.swallow.platform.core.common.resp.BaseResp;
+import cn.swallow.platform.core.common.reqresp.BaseResp;
 import cn.swallow.platform.core.shiro.ShiroKit;
 import cn.swallow.platform.core.util.HttpContext;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.CredentialsException;
-import org.apache.shiro.authc.DisabledAccountException;
+import org.apache.shiro.authc.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -59,25 +57,39 @@ public class GlobalExceptionHandler {
     /**
      * 账号被冻结异常
      */
-    @ExceptionHandler(DisabledAccountException.class)
+    @ExceptionHandler(AccountException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public String accountLocked(DisabledAccountException e, Model model,HttpServletRequest request) {
+    public String account(AccountException e, Model model,HttpServletRequest request) {
         String username = request.getParameter("username");
-        LogManager.me().executeLog(LogTaskFactory.loginLog(username, "账号被冻结", HttpContext.getIp()));
-        model.addAttribute("tips", "账号被冻结");
-        return "/login.html";
+        if (e instanceof DisabledAccountException){
+            LogManager.me().executeLog(LogTaskFactory.loginLog(username, "账号被冻结", HttpContext.getIp()));
+            model.addAttribute("tips", "账号被冻结");
+        }else if (e instanceof UnknownAccountException){
+            LogManager.me().executeLog(LogTaskFactory.loginLog(username, "账户不存在", HttpContext.getIp()));
+            model.addAttribute("tips", "账户不存在");
+        }else{
+            LogManager.me().executeLog(LogTaskFactory.loginLog(username, "账户未知", HttpContext.getIp()));
+            model.addAttribute("tips", "账户未知");
+        }
+        return "/admin/login";
     }
 
+
     /**
-     * 账号密码错误异常
+     * 密码错误异常
      */
     @ExceptionHandler(CredentialsException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public String credentials(CredentialsException e, Model model) {
         String username = HttpContext.getRequest().getParameter("username");
-        LogManager.me().executeLog(LogTaskFactory.loginLog(username, "账号密码错误", HttpContext.getIp()));
-        model.addAttribute("tips", "账号密码错误");
-        return "/login.html";
+        if (e instanceof ExpiredCredentialsException){
+            LogManager.me().executeLog(LogTaskFactory.loginLog(username, "凭证过期", HttpContext.getIp()));
+            model.addAttribute("tips", "凭证过期");
+        }else if (e instanceof IncorrectCredentialsException){
+            LogManager.me().executeLog(LogTaskFactory.loginLog(username, "密码错误", HttpContext.getIp()));
+            model.addAttribute("tips", "密码错误");
+        }
+        return "/admin/login";
     }
 
     /**
@@ -89,7 +101,7 @@ public class GlobalExceptionHandler {
         String username = HttpContext.getRequest().getParameter("username");
         LogManager.me().executeLog(LogTaskFactory.loginLog(username, "验证码错误", HttpContext.getIp()));
         model.addAttribute("tips", "验证码错误");
-        return "/login.html";
+        return "/admin/login";
     }
 
     /**
@@ -99,7 +111,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ResponseBody
     public BaseResp credentials(UndeclaredThrowableException e) {
-        HttpContext.getRequest().setAttribute("tip", "权限异常");
+        HttpContext.getRequest().setAttribute("tips", "权限异常");
         log.error("权限异常!", e);
         return new BaseResp(BizExceptionEnum.NO_PERMITION.getCode(), BizExceptionEnum.NO_PERMITION.getMsg());
     }
@@ -111,7 +123,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public BaseResp notFount(RuntimeException e) {
         LogManager.me().executeLog(LogTaskFactory.exceptionLog(ShiroKit.getUser().getId(), e));
-        HttpContext.getRequest().setAttribute("tip", "服务器未知运行时异常");
+        HttpContext.getRequest().setAttribute("tips", "服务器未知运行时异常");
         log.error("运行时异常:", e);
         return new BaseResp(BizExceptionEnum.SERVER_ERROR.getCode(), BizExceptionEnum.SERVER_ERROR.getMsg());
     }

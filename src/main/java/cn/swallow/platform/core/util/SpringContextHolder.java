@@ -5,6 +5,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
+/**
+ * ApplicationContext启动时会自动注入进来，可用于获取由spring维护的对象
+ */
 @Component
 public class SpringContextHolder implements ApplicationContextAware {
     private static ApplicationContext context;
@@ -32,7 +35,7 @@ public class SpringContextHolder implements ApplicationContextAware {
 
     public static void assertApplicationContext(){
         if (null == context){
-            throw new RuntimeException("Application context inject fail");
+            throw new RuntimeException("application context inject fail");
         }
     }
 }

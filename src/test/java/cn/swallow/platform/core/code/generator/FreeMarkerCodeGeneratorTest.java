@@ -1,6 +1,6 @@
 package cn.swallow.platform.core.code.generator;
 
-import cn.swallow.platform.SwallowffApplication;
+import cn.swallow.platform.Application;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -10,12 +10,11 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SwallowffApplication.class)
-public class CodeGeneratorTest {
+@SpringBootTest(classes = Application.class)
+public class FreeMarkerCodeGeneratorTest {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Test
@@ -23,9 +22,9 @@ public class CodeGeneratorTest {
         String tableName = "test_table";
         String targetPackage = "cn.swallow.platform.modular.manage";
         String className = "Article";
-        CodeGenerator codeGenerator = new CodeGenerator(tableName,targetPackage,className);
+        FreeMarkerCodeGenerator freeMarkerCodeGenerator = new FreeMarkerCodeGenerator(tableName,targetPackage,className);
         try {
-            codeGenerator.generate();
+            freeMarkerCodeGenerator.generate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,7 +37,7 @@ public class CodeGeneratorTest {
         String pathSeparator = File.pathSeparator;
         String separator = File.separator;
 //        String classPath = new CodeGenerator("","").getClass().getResource("").getPath();
-        String basePackage = SwallowffApplication.class.getPackage().getName();
+        String basePackage = Application.class.getPackage().getName();
         logger.info("path: [{}]",path);
         logger.info("realPath: [{}]",realPath);
         logger.info("pathSeparator: [{}]",pathSeparator);

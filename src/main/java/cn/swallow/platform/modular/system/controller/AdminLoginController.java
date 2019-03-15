@@ -50,18 +50,7 @@ public class AdminLoginController extends BaseController {
             }
         }
         Subject subject = ShiroKit.getSubject();
-        try {
-            subject.login(new UsernamePasswordToken(account.trim(),password.trim(),rememberme == null ? false : rememberme));
-        } catch (IncorrectCredentialsException e1){
-            redirectAttributes.addFlashAttribute("tips", UserAuthState.INCORRECT_CREDENTIALS.getMsg());
-            return REDIRECT + "/admin/login";
-        } catch (UnknownAccountException e2){
-            redirectAttributes.addFlashAttribute("tips",UserAuthState.UNKNOWN_ACCOUNT.getMsg());
-            return REDIRECT + "/admin/login";
-        } catch (AuthenticationException e3) {
-            redirectAttributes.addFlashAttribute("tips",UserAuthState.LOGIN_FAIL.getMsg());
-            return REDIRECT + "/admin/login";
-        }
+        subject.login(new UsernamePasswordToken(account.trim(),password.trim(),rememberme == null ? false : rememberme));
         return REDIRECT + "/admin";
     }
 

@@ -1,4 +1,6 @@
-package cn.swallow.platform.core.common.exception;
+package cn.swallow.platform.core.common.exception.constant;
+
+import cn.swallow.platform.core.common.exception.AbstractBaseExceptionEnum;
 
 /**
  * @author shenyu

@@ -1,6 +1,6 @@
 package cn.swallow.platform.core.code.generator;
 
-import cn.swallow.platform.core.code.config.CodeGenConfig;
+import cn.swallow.platform.core.code.CodeGenConfig;
 import cn.swallow.platform.core.code.entity.ColumnClass;
 import cn.swallow.platform.core.util.JdbcUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -18,15 +18,15 @@ import java.util.*;
  * @create 2019/3/12
  */
 @Component
-public class CodeGenerator {
+public class FreeMarkerCodeGenerator {
     private String tableName;
     private String targetPackage;
     private String className;
 
-    private CodeGenerator() {
+    private FreeMarkerCodeGenerator() {
     }
 
-    public CodeGenerator(String tableName, String targetPackage, String className){
+    public FreeMarkerCodeGenerator(String tableName, String targetPackage, String className){
         this.tableName = tableName;
         this.targetPackage = targetPackage;
         this.className = className;
@@ -90,18 +90,18 @@ public class CodeGenerator {
         List<ColumnClass> columnClassList = new ArrayList<>();
         ColumnClass columnClass = null;
         while(resultSet.next()){
-            //id字段略过
-            if(resultSet.getString("COLUMN_NAME").equals("id")) continue;
-            columnClass = new ColumnClass();
-            //获取字段名称
-            columnClass.setColumnName(resultSet.getString("COLUMN_NAME"));
-            //获取字段类型
-            columnClass.setColumnType(resultSet.getString("TYPE_NAME"));
-            //转换字段名称，如 sys_name 变成 SysName
-            columnClass.setChangeColumnName(replaceUnderLineAndUpperCase(resultSet.getString("COLUMN_NAME")));
-            //字段在数据库的注释
-            columnClass.setColumnComment(resultSet.getString("REMARKS"));
-            columnClassList.add(columnClass);
+//            //id字段略过
+//            if(resultSet.getString("COLUMN_NAME").equals("id")) continue;
+//            columnClass = new ColumnClass();
+//            //获取字段名称
+//            columnClass.setColumnName(resultSet.getString("COLUMN_NAME"));
+//            //获取字段类型
+//            columnClass.setColumnType(resultSet.getString("TYPE_NAME"));
+//            //转换字段名称，如 sys_name 变成 SysName
+//            columnClass.setChangeColumnName(replaceUnderLineAndUpperCase(resultSet.getString("COLUMN_NAME")));
+//            //字段在数据库的注释
+//            columnClass.setColumnComment(resultSet.getString("REMARKS"));
+//            columnClassList.add(columnClass);
         }
         Map<String,Object> dataMap = new HashMap<>();
         dataMap.put("table_columns",columnClassList);
@@ -144,22 +144,22 @@ public class CodeGenerator {
 //        }
 //    }
 
-    public static String replaceUnderLineAndUpperCase(String str){
-        StringBuffer sb = new StringBuffer();
-        sb.append(str);
-        int count = sb.indexOf("_");
-        while(count!=0){
-            int num = sb.indexOf("_",count);
-            count = num + 1;
-            if(num != -1){
-                char ss = sb.charAt(count);
-                char ia = (char) (ss - 32);
-                sb.replace(count , count + 1,ia + "");
-            }
-        }
-        String result = sb.toString().replaceAll("_","");
-        return StringUtils.capitalize(result);
-    }
+//    public static String replaceUnderLineAndUpperCase(String str){
+//        StringBuffer sb = new StringBuffer();
+//        sb.append(str);
+//        int count = sb.indexOf("_");
+//        while(count!=0){
+//            int num = sb.indexOf("_",count);
+//            count = num + 1;
+//            if(num != -1){
+//                char ss = sb.charAt(count);
+//                char ia = (char) (ss - 32);
+//                sb.replace(count , count + 1,ia + "");
+//            }
+//        }
+//        String result = sb.toString().replaceAll("_","");
+//        return StringUtils.capitalize(result);
+//    }
 
 
 

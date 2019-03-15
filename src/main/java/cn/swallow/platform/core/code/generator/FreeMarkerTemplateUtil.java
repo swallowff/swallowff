@@ -4,6 +4,7 @@ package cn.swallow.platform.core.code.generator;
  * @author shenyu
  * @create 2019/3/12
  */
+@Deprecated
 public class FreeMarkerTemplateUtil {
 //    private FreeMarkerTemplateUtil(){}
 //    private static final Configuration CONFIGURATION = new Configuration(Configuration.VERSION_2_3_22);

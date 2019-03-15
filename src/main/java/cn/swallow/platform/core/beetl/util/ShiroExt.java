@@ -5,6 +5,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
 /**
+ * shiro对外工具
  * @author shenyu
  * @create 2019/3/15
  */

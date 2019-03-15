@@ -1,9 +1,10 @@
 package cn.swallow.platform.core.common.controller;
 
-import cn.swallow.platform.core.common.resp.BaseResp;
+import cn.swallow.platform.core.common.reqresp.BaseResp;
 import cn.swallow.platform.core.util.HttpContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.servlet.support.RequestContextUtils;
@@ -15,6 +16,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public abstract class BaseController {
+    @Value("${swallow.path.admin}")
+    protected static String ADMIN_PATH;
     protected Logger logger = LoggerFactory.getLogger(getClass());
     protected final String REDIRECT = "redirect:";
 

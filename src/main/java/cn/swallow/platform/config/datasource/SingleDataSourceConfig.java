@@ -24,27 +24,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-/**
- * druid数据源配置
- */
+//druid数据源配置
 @Configuration
 @ConditionalOnProperty(prefix = "swallow.muti-datasource", name = "open", havingValue = "false", matchIfMissing = true)
 @EnableTransactionManagement
 @MapperScan(basePackages = {"cn.swallow.platform.modular.*.dao"})
 public class SingleDataSourceConfig {
 
-    /**
-     * druid配置
-     */
+
+    //druid配置
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DruidProperties druidProperties() {
         return new DruidProperties();
     }
 
-    /**
-     * 单数据源连接池配置
-     */
+    //单数据源连接池配置
     @Bean
     public DruidDataSource dataSource(DruidProperties druidProperties) {
         DruidDataSource dataSource = new DruidDataSource();

@@ -1,6 +1,6 @@
-package cn.swallow.platform.core.code.config;
+package cn.swallow.platform.core.code;
 
-import cn.swallow.platform.SwallowffApplication;
+import cn.swallow.platform.Application;
 import cn.swallow.platform.config.properties.SwallowProperties;
 import org.springframework.core.io.DefaultResourceLoader;
 
@@ -16,7 +16,7 @@ public class CodeGenConfig {
     public static final String java_suffix = ".java";
     public static final String html_suffix = ".html";
     public static String PROJECT_PATH = SwallowProperties.PROJECT_PATH;
-    public static String basePackage = SwallowffApplication.class.getPackage().getName();
+    public static String basePackage = Application.class.getPackage().getName();
     public static String author = "shenyu";
 
 

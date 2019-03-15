@@ -1,6 +1,6 @@
-package cn.swallow.platform.core.common.resp;
+package cn.swallow.platform.core.common.reqresp;
 
-import cn.swallow.platform.core.constant.state.AbstractState;
+import cn.swallow.platform.core.common.AbstractState;
 import cn.swallow.platform.core.constant.state.ResponseState;
 import cn.swallow.platform.core.util.GsonHelper;
 import com.fasterxml.jackson.annotation.JsonInclude;

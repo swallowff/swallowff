@@ -1,4 +1,4 @@
-package cn.swallow.platform.core.constant.state;
+package cn.swallow.platform.core.common;
 
 public interface AbstractState {
     Integer getCode();

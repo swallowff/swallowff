@@ -3,6 +3,9 @@ package cn.swallow.platform.core.util;
 import java.io.Closeable;
 import java.io.IOException;
 
+/**
+ * 流工具类
+ */
 public class StreamUtil {
 
     public static void close(Closeable... closeables){

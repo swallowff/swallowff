@@ -136,7 +136,7 @@ public class ShiroConfig {
          *
          * 顺序从上到下,优先级依次降低
          *
-         * api开头的接口，走rest api鉴权，不走shiro鉴权
+         * openApi开头的接口，走rest api鉴权，不走shiro鉴权
          *
          */
         Map<String, String> hashMap = new LinkedHashMap<>();
@@ -145,7 +145,7 @@ public class ShiroConfig {
 //        hashMap.put("/blog","blog");
         hashMap.put("/openApi/**", "anon");
         hashMap.put("/admin/login", "anon");
-        hashMap.put("/global/sessionError", "anon");
+        hashMap.put("/global/**", "anon");
         hashMap.put("/kaptcha", "anon");
         hashMap.put("/admin/**", "user");
         shiroFilter.setFilterChainDefinitionMap(hashMap);

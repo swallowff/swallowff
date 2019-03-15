@@ -1,6 +1,6 @@
 package cn.swallow.platform.modular.api;
 
-import cn.swallow.platform.core.common.resp.BaseResp;
+import cn.swallow.platform.core.common.reqresp.BaseResp;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

@@ -1,6 +1,6 @@
 package cn.swallow.platform.config.web;
 
-import cn.swallow.platform.core.interceptor.LogCostFilter;
+import cn.swallow.platform.core.interceptor.XssFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,15 +9,15 @@ import org.springframework.context.annotation.Configuration;
  * @author shenyu
  * @create 2019/3/13
  */
-//@Configuration
+@Configuration
 public class FilterConfig {
 
-//    @Bean
+    @Bean
     public FilterRegistrationBean registFilter() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new LogCostFilter());
+        registration.setFilter(new XssFilter());
         registration.addUrlPatterns("/*");
-        registration.setName("LogCostFilter");
+        registration.setName("xssFilter");
         registration.setOrder(1);
         return registration;
     }

@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.swallow.platform.core.common.annotation.BusinessLog;
 import cn.swallow.platform.core.common.controller.BaseController;
-import cn.swallow.platform.core.common.resp.BaseResp;
+import cn.swallow.platform.core.common.reqresp.BaseResp;
 import cn.swallow.platform.core.constant.dict.CommonEnum;
 import cn.swallow.platform.core.constant.state.ResponseState;
 import cn.swallow.platform.core.constant.state.UserAuthState;

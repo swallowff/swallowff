@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 自定义Authentication对象，使得Subject除了携带用户的登录名外还可以携带更多信息
  * @author yushen
- * @date 2019年3月9日 上午10:26:43
+ * @date 2019年3月9日
  */
 public class ShiroUser implements Serializable {
 

@@ -33,7 +33,7 @@ public class LogTaskFactory {
                     LoginLog loginLog = LogFactory.createLoginLog(LogType.LOGIN,userId,null,ip);
                     loginLogMapper.insert(loginLog);
                 }catch (Exception e){
-                    logger.error("创建登录日志异常");
+                    logger.error("创建登录日志失败");
                 }
             }
         };
@@ -48,7 +48,7 @@ public class LogTaskFactory {
                 try {
                     loginLogMapper.insert(loginLog);
                 } catch (Exception e) {
-                    logger.error("创建登录失败异常!", e);
+                    logger.error("创建登录日志异常!", e);
                 }
             }
         };

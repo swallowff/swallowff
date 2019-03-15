@@ -15,6 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
 /**
+ * beetl页面工具注册
  * @author shenyu
  * @create 2019/3/15
  */

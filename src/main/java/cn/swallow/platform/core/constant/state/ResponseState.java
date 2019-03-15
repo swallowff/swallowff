@@ -1,5 +1,7 @@
 package cn.swallow.platform.core.constant.state;
 
+import cn.swallow.platform.core.common.AbstractState;
+
 public enum ResponseState implements AbstractState {
     /**
      * 通用状态
