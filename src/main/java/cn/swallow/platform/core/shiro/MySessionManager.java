@@ -1,10 +1,6 @@
 package cn.swallow.platform.core.shiro;
 
 import cn.hutool.core.util.StrUtil;
-import freemarker.template.utility.StringUtil;
-import org.apache.shiro.session.mgt.SessionKey;
-import org.apache.shiro.util.StringUtils;
-import org.apache.shiro.web.servlet.Cookie;
 import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.apache.shiro.web.util.WebUtils;

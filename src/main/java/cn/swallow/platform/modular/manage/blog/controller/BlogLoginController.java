@@ -18,7 +18,7 @@ public class BlogLoginController extends BaseController {
      */
     @RequestMapping("login")
     public String login(){
-        return "pages/blog/login";
+        return "admin/blog/login";
     }
 
 }

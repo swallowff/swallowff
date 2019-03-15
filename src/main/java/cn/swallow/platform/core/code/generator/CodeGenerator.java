@@ -3,13 +3,10 @@ package cn.swallow.platform.core.code.generator;
 import cn.swallow.platform.core.code.config.CodeGenConfig;
 import cn.swallow.platform.core.code.entity.ColumnClass;
 import cn.swallow.platform.core.util.JdbcUtil;
-import cn.swallow.platform.core.util.StreamUtil;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -108,44 +105,44 @@ public class CodeGenerator {
         }
         Map<String,Object> dataMap = new HashMap<>();
         dataMap.put("table_columns",columnClassList);
-        generateFileByTemplate(CodeGenConfig.CodeGenType.Entity,targetFile, this.targetPackage,dataMap);
+//        generateFileByTemplate(CodeGenConfig.CodeGenType.Entity,targetFile, this.targetPackage,dataMap);
     }
 
-    private void generateFileByTemplate(CodeGenConfig.CodeGenType entity,File file,String targetPackage,Map<String,Object> dataMap){
-        File targetFile = null;
-        OutputStreamWriter osw = null;
-        Writer out = null;
-        FileOutputStream fos = null;
-        try {
-            Template template = FreeMarkerTemplateUtil.getTemplate(entity.getTplFileName());
-            if (file.exists() && file.isDirectory()){
-                targetFile = new File(file.getAbsolutePath()+File.separator+className+CodeGenConfig.java_suffix);
-                if (targetFile.exists()){
-                    //已有文件,先删除
-                    targetFile.delete();
-                }
-                targetFile.createNewFile();
-                fos = new FileOutputStream(targetFile);
-                dataMap.put("table_name_small",tableName);
-                dataMap.put("class_name",className);
-                dataMap.put("author",CodeGenConfig.author);
-                dataMap.put("date",new Date());
-                dataMap.put("package_name",targetPackage);
-                dataMap.put("table_annotation","表的备注");
-                osw = new OutputStreamWriter(fos ,"utf-8");
-                out = new BufferedWriter(osw,10240);
-                template.process(dataMap,out);
-            }else {
-                throw new FileNotFoundException(String.format("file is not exists or file is not a directory : {%s}",file.getAbsolutePath()));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TemplateException e2){
-            e2.printStackTrace();
-        } finally {
-            StreamUtil.close(fos,out,osw);
-        }
-    }
+//    private void generateFileByTemplate(CodeGenConfig.CodeGenType entity,File file,String targetPackage,Map<String,Object> dataMap){
+//        File targetFile = null;
+//        OutputStreamWriter osw = null;
+//        Writer out = null;
+//        FileOutputStream fos = null;
+//        try {
+//            Template template = FreeMarkerTemplateUtil.getTemplate(entity.getTplFileName());
+//            if (file.exists() && file.isDirectory()){
+//                targetFile = new File(file.getAbsolutePath()+File.separator+className+CodeGenConfig.java_suffix);
+//                if (targetFile.exists()){
+//                    //已有文件,先删除
+//                    targetFile.delete();
+//                }
+//                targetFile.createNewFile();
+//                fos = new FileOutputStream(targetFile);
+//                dataMap.put("table_name_small",tableName);
+//                dataMap.put("class_name",className);
+//                dataMap.put("author",CodeGenConfig.author);
+//                dataMap.put("date",new Date());
+//                dataMap.put("package_name",targetPackage);
+//                dataMap.put("table_annotation","表的备注");
+//                osw = new OutputStreamWriter(fos ,"utf-8");
+//                out = new BufferedWriter(osw,10240);
+//                template.process(dataMap,out);
+//            }else {
+//                throw new FileNotFoundException(String.format("file is not exists or file is not a directory : {%s}",file.getAbsolutePath()));
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (TemplateException e2){
+//            e2.printStackTrace();
+//        } finally {
+//            StreamUtil.close(fos,out,osw);
+//        }
+//    }
 
     public static String replaceUnderLineAndUpperCase(String str){
         StringBuffer sb = new StringBuffer();

@@ -1,8 +1,12 @@
 package cn.swallow.platform.modular.system.controller;
 
+import cn.hutool.core.util.StrUtil;
 import cn.swallow.platform.core.common.controller.BaseController;
+import cn.swallow.platform.core.common.exception.InvalidKaptchaException;
 import cn.swallow.platform.core.constant.state.UserAuthState;
 import cn.swallow.platform.core.shiro.ShiroKit;
+import cn.swallow.platform.core.util.KaptchaUtil;
+import com.google.code.kaptcha.Constants;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -30,13 +34,21 @@ public class AdminLoginController extends BaseController {
         if (ShiroKit.isAuthenticated()){
             return REDIRECT + "/admin";
         } else {
-            return "pages/admin/login";
+            model.addAttribute("beetl","beetl success");
+            return "admin/login";
         }
     }
 
     @RequestMapping(value = "${swallow.path.admin}/login",method = RequestMethod.POST)
     public String doLogin(@RequestParam(value = "account") String account,
-                          @RequestParam(value = "password") String password, Boolean rememberme, RedirectAttributes redirectAttributes, Model model){
+                          @RequestParam(value = "password") String password, Boolean rememberme, String kaptcha, RedirectAttributes redirectAttributes, Model model){
+        if (KaptchaUtil.getKaptchaOnOff()) {
+            kaptcha = kaptcha.trim();
+            String code = (String) super.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+            if (StrUtil.isBlank(kaptcha) || !kaptcha.equalsIgnoreCase(code)) {
+                throw new InvalidKaptchaException();
+            }
+        }
         Subject subject = ShiroKit.getSubject();
         try {
             subject.login(new UsernamePasswordToken(account.trim(),password.trim(),rememberme == null ? false : rememberme));
@@ -62,12 +74,13 @@ public class AdminLoginController extends BaseController {
 
     @RequestMapping("/")
     public String defaultPage(){
-        return "pages/blog/frontIndex";
+        return "blog/login";
     }
 
     @RequestMapping("front")
     public String front(){
-        return "pages/blog/frontIndex";
+//        return "admin/blog/frontIndex";
+        return "admin/index";
     }
 
     /**
@@ -77,16 +90,8 @@ public class AdminLoginController extends BaseController {
      */
     @RequestMapping("admin")
     public String index(Model model){
-        return "pages/admin/index";
+        return "admin/index";
     }
 
-    /**
-     * 欢迎页
-     * @return
-     */
-    @RequestMapping(value = "${swallow.path.admin}/welcome")
-    public String welcome(){
-        return "pages/admin/welcome";
-    }
 
 }

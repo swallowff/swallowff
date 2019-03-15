@@ -28,13 +28,13 @@ public class RoleController extends BaseController {
     @RequestMapping("detail")
     public String getRole(@RequestParam("id") Integer id, Model model){
         model.addAttribute("role",roleService.selectById(id));
-        return "roleDetail";
+        return "admin/system/roleDetail";
     }
 
     @RequestMapping("list")
     public String listRole(Role role,Model model){
         model.addAttribute("list",roleService.findList(role));
-        return "roleList";
+        return "admin/system/roleList";
     }
 
     @RequestMapping("update")

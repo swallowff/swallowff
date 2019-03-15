@@ -20,6 +20,7 @@
         <kaptcha.version>2.3.2</kaptcha.version>
         <ehcache.version>3.3.1</ehcache.version>
         <ehcache.core.version>2.6.11</ehcache.core.version>
+        <beetl.version>2.9.3</beetl.version>
     </properties>
 
     <dependencies>
@@ -31,10 +32,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-freemarker</artifactId>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
@@ -117,6 +118,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--ehcacheh缓存-->
         <dependency>
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
@@ -136,6 +138,19 @@
             <version>3.7</version>
         </dependency>
 
+        <!--beetl模板引擎-->
+        <dependency>
+            <groupId>com.ibeetl</groupId>
+            <artifactId>beetl</artifactId>
+            <version>${beetl.version}</version>
+        </dependency>
+
+        <!--验证码-->
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>${kaptcha.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

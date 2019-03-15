@@ -7,7 +7,7 @@ public class BizException extends RuntimeException {
     }
 
     public BizException(BizExceptionEnum exceptionEnum){
-        super(exceptionEnum.getMessage());
+        super(exceptionEnum.getMsg());
     }
 
     public BizException(String message, Throwable cause) {

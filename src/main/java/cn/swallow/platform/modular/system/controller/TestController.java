@@ -1,10 +1,12 @@
 package cn.swallow.platform.modular.system.controller;
 
 import cn.swallow.platform.config.properties.SwallowProperties;
+import cn.swallow.platform.core.common.controller.SwallowErrorView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,8 +28,8 @@ public class TestController {
     }
 
     @RequestMapping(value = "muban")
-    public String muban(){
-        return "index";
+    public View muban(){
+        return new SwallowErrorView();
     }
 
 

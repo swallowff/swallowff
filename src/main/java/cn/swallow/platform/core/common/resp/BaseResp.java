@@ -15,6 +15,11 @@ public class BaseResp implements Serializable {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private Serializable data;
 
+    public BaseResp (Integer code,String message){
+        this.code = code;
+        this.message = message;
+    }
+
     public BaseResp (ResponseState respResponseState){
         this.code = respResponseState.getCode();
         this.message = respResponseState.getMsg();

@@ -15,6 +15,8 @@ public class SwallowProperties {
 
     private String fileUploadPath;
 
+    private Boolean kaptchaOpen = false;
+
     /**
      * session 失效时间（默认为30分钟 单位：秒）
      */
@@ -55,5 +57,13 @@ public class SwallowProperties {
 
     public void setSessionValidationInterval(Integer sessionValidationInterval) {
         this.sessionValidationInterval = sessionValidationInterval;
+    }
+
+    public Boolean getKaptchaOpen() {
+        return kaptchaOpen;
+    }
+
+    public void setKaptchaOpen(Boolean kaptchaOpen) {
+        this.kaptchaOpen = kaptchaOpen;
     }
 }
