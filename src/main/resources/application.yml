@@ -21,7 +21,7 @@ spring:
       prefix: /WEB-INF/view/
 
   profiles:
-    active: prod
+    active: local
 #  freemarker:
 #    request-context-attribute: req
 #    suffix: .html
@@ -51,6 +51,7 @@ spring:
   profiles: prod
   datasource:
     url: jdbc:mysql://120.79.225.48:3306/spring_boot_demo?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=CTT
+    db-name: spring_boot_demo
     username: root
     password: yanni623..
     filters: wall,mergeStat
@@ -63,6 +64,7 @@ spring:
   profiles: local
   datasource:
     url: jdbc:mysql://localhost:3306/swallow_test?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=CTT
+    db-name: swallow_test
     username: root
     password: yanni623..
     filters: wall,mergeStat

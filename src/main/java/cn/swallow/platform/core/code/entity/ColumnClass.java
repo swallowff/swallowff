@@ -9,8 +9,8 @@ public class ColumnClass {
     private String columnName;
     /** 数据库字段类型 **/
     private String columnType;
-    /** 数据库字段首字母小写且去掉下划线字符串 **/
-    private String changeColumnName;
+    /** 数据库字段首字母大写且去掉下划线字符串 **/
+    private String firstUppercase;
     /** 数据库字段注释 **/
     private String columnComment;
 
@@ -38,11 +38,11 @@ public class ColumnClass {
         this.columnType = columnType;
     }
 
-    public String getChangeColumnName() {
-        return changeColumnName;
+    public String getFirstUppercase() {
+        return firstUppercase;
     }
 
-    public void setChangeColumnName(String changeColumnName) {
-        this.changeColumnName = changeColumnName;
+    public void setFirstUppercase(String firstUppercase) {
+        this.firstUppercase = firstUppercase;
     }
 }

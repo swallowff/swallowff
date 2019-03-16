@@ -103,7 +103,6 @@ public class CommonUtil {
     public static byte[] toByteArray(String filename) {
         File f = new File(filename);
         if (!f.exists()) {
-//            log.error("文件未找到！" + filename);
             throw new ServiceException(CoreExceptionEnum.FILE_NOT_FOUND);
         } else {
             FileChannel channel = null;
