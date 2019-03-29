@@ -7,8 +7,8 @@ package cn.swallow.platform.core.code.entity;
 public class GenerateInfo {
     private String table;       //表名称
     private String className;   //生成的类名
-    private String module;       //模块名
-    private String author;      //作者
+    private String module = "system";       //模块名
+    private String author = "yu.shen";      //作者
 
     private boolean fileOverride = false;
     private boolean genEntity = false;

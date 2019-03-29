@@ -1,5 +1,6 @@
 package cn.swallow.platform.core.code.builder;
 
+import cn.swallow.platform.core.code.GeneratorConfigManager;
 import cn.swallow.platform.core.code.config.*;
 import cn.swallow.platform.core.code.entity.GenerateInfo;
 import cn.swallow.platform.core.code.generator.GenerateUtil;
@@ -17,21 +18,27 @@ import java.util.Map;
  * @author shenyu
  * @create 2019/3/16
  */
-public class ConfigBuilder {
+public class GeneratorConfigManagerBuilder {
+    private GeneratorConfigManager configManager;
     private GenerateInfo generateInfo;
+
     private GlobalConfig globalConfig;
     private PackageConfig packageConfig;
     private TemplateConfig templateConfig;
     private FilePathConfig filePathConfig;
 
+    public GeneratorConfigManager create(){
+        return new GeneratorConfigManager(globalConfig,packageConfig,templateConfig,filePathConfig);
+    }
 
-
-    public ConfigBuilder(GenerateInfo generateInfo) {
+    public GeneratorConfigManagerBuilder(GenerateInfo generateInfo) {
         this.generateInfo = generateInfo;
     }
 
-    public GlobalConfig buildGlobalConfig() throws SQLException {
-        globalConfig = new GlobalConfig();
+    public GeneratorConfigManagerBuilder buildGlobalConfig() throws SQLException {
+        if (null == globalConfig){
+            globalConfig = new GlobalConfig();
+        }
         globalConfig.setTableName(generateInfo.getTable());
         globalConfig.setAuthor(generateInfo.getAuthor());
         globalConfig.setClassName(generateInfo.getClassName() == null ? StringUtil.replaceUnderLineAndUpperCase(generateInfo.getTable()) : generateInfo.getClassName());
@@ -44,10 +51,13 @@ public class ConfigBuilder {
         globalConfig.setGenEntity(generateInfo.isGenEntity());
         globalConfig.setGenService(generateInfo.isGenService());
         globalConfig.setGenMapper(generateInfo.isGenMapper());
-        return globalConfig;
+        return this;
     }
 
     public PackageConfig buildPackageConfig(){
+        if (null == packageConfig){
+            packageConfig = new PackageConfig();
+        }
         packageConfig = new PackageConfig();
         packageConfig.setModuleName(generateInfo.getModule());
         packageConfig.setFilePackage(handlePackageConfig(packageConfig));
@@ -107,5 +117,7 @@ public class ConfigBuilder {
         fileMap.put(GenFileType.Mapper,new File(projectPath + src + main + GenerateUtil.convertPackageToPath(packageMap.get(GenFileType.Mapper)) + globalConfig.getClassName() + "Dto" + filePathConfig.getJavaSuffix()));
         return fileMap;
     }
+
+
 
 }

@@ -1,5 +1,6 @@
 package cn.swallow.platform.core.code.generator;
 
+import cn.swallow.platform.core.code.GeneratorConfigManager;
 import cn.swallow.platform.core.code.config.*;
 import cn.swallow.platform.core.code.entity.ColumnClass;
 import cn.swallow.platform.core.util.StreamUtil;
@@ -18,21 +19,15 @@ import java.util.*;
  * @create 2019/3/16
  */
 public class BeetlCodeGenerator {
-    private GlobalConfig globalConfig;
-    private PackageConfig packageConfig;
-    private TemplateConfig templateConfig;
-    private FilePathConfig filePathConfig;
+    private GeneratorConfigManager configManager;
 
-    public BeetlCodeGenerator(GlobalConfig globalConfig, PackageConfig packageConfig, TemplateConfig templateConfig, FilePathConfig filePathConfig){
-        this.globalConfig = globalConfig;
-        this.packageConfig = packageConfig;
-        this.templateConfig = templateConfig;
-        this.filePathConfig = filePathConfig;
+    public BeetlCodeGenerator(GeneratorConfigManager configManager){
+        this.configManager = configManager;
     }
 
     private ResultSet queryMetaData() throws SQLException {
-        DatabaseMetaData metaData = globalConfig.getConnection().getMetaData();
-        return metaData.getColumns(null,"%",globalConfig.getTableName(),"%");
+        DatabaseMetaData metaData = configManager.getConnection().getMetaData();
+        return metaData.getColumns(null,"%",configManager.getTableName(),"%");
     }
 
     private List<ColumnClass> wrapDataMeta(ResultSet resultSet) throws SQLException{
@@ -59,10 +54,10 @@ public class BeetlCodeGenerator {
     private Map<String,Object> wrapToTemplateData(List<ColumnClass> columnClasses,GenFileType fileType){
         Map<String,Object> dataMap = new HashMap<String,Object>();
         dataMap.put("items",columnClasses);
-        dataMap.put("className",globalConfig.getClassName());
-        dataMap.put("author",globalConfig.getAuthor());
+        dataMap.put("className",configManager.getClassName());
+        dataMap.put("author",configManager.getAuthor());
         dataMap.put("date",new Date());
-        dataMap.put("packageName",packageConfig.fetchFilePackageByType(fileType));
+        dataMap.put("classPackage",configManager.fetchFilePackageByType(fileType));
         return dataMap;
     }
 
@@ -75,27 +70,27 @@ public class BeetlCodeGenerator {
             List<ColumnClass> columnClasses = wrapDataMeta(resultSet);
             Map<String,Object> dataMap = null;
             //2 封装数据(生成不同文件时封装的数据不同)
-            if (globalConfig.isGenEntity()){
+            if (configManager.isGenEntity()){
                 dataMap = wrapToTemplateData(columnClasses,GenFileType.Entity);
                 genEntityFile(dataMap);
             }
-            if (globalConfig.isGenDao()){
+            if (configManager.isGenDao()){
                 dataMap = wrapToTemplateData(columnClasses,GenFileType.Dao);
                 genDaoFile(dataMap);
             }
-            if (globalConfig.isGenService()){
+            if (configManager.isGenService()){
                 dataMap = wrapToTemplateData(columnClasses,GenFileType.Service);
                 genServiceFile(dataMap);
             }
-            if (globalConfig.isGenController()){
+            if (configManager.isGenController()){
                 dataMap = wrapToTemplateData(columnClasses,GenFileType.Controller);
                 genControllerFile(dataMap);
             }
-            if (globalConfig.isGenDto()){
+            if (configManager.isGenDto()){
                 dataMap = wrapToTemplateData(columnClasses,GenFileType.Dto);
                 genDtoFile(dataMap);
             }
-            if (globalConfig.isGenMapper()){
+            if (configManager.isGenMapper()){
                 dataMap = wrapToTemplateData(columnClasses,GenFileType.Mapper);
                 genMapperFile(dataMap);
             }
@@ -111,11 +106,11 @@ public class BeetlCodeGenerator {
         OutputStreamWriter osw = null;
         BufferedWriter bw = null;
         try {
-            fos = new FileOutputStream(filePathConfig.fetchTargetFileByType(fileType));
+            fos = new FileOutputStream(configManager.fetchTargetFileByType(fileType));
             osw = new OutputStreamWriter(fos,Charset.forName("utf-8"));
             bw = new BufferedWriter(osw,10240);
             //3 获取模板
-            Template template = templateConfig.getTemplate(fileType);
+            Template template = configManager.getTemplate(fileType);
             //4 数据绑定模板
             template.binding(dataMap);
             //5 文件输出

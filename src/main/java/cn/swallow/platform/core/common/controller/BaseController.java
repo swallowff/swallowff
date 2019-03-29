@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public abstract class BaseController {
     @Value("${swallow.path.admin}")
-    protected static String ADMIN_PATH;
+    protected String ADMIN_PATH;
     protected Logger logger = LoggerFactory.getLogger(getClass());
     protected final String REDIRECT = "redirect:";
 
