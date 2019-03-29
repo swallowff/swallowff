@@ -1,6 +1,6 @@
 package cn.swallow.platform.practice.concurrent.callable.entity;
 
-import java.util.UUID;
+import cn.swallow.platform.practice.common.constant.RespStatuesEnum;
 
 /**
  * @author shenyu
@@ -9,24 +9,17 @@ import java.util.UUID;
 
 public class MsgResult {
     private String msgId;
+    private Integer code;
+    private boolean success;
     private String fromUser;
     private String toUser;
-    private String msgType;
-    private String content;
 
-    public MsgResult(String fromUser, String toUser, String content) {
-        this.msgId = UUID.fromString("msg").toString();
-        this.fromUser = fromUser;
-        this.toUser = toUser;
-        this.content = content;
-    }
-
-    public String getMsgId() {
-        return msgId;
-    }
-
-    public void setMsgId(String msgId) {
-        this.msgId = msgId;
+    public MsgResult(Message message, RespStatuesEnum statuesEnum) {
+        this.msgId = message.getMsgId();
+        this.code = statuesEnum.getCode();
+        this.success = statuesEnum.isSuccess();
+        this.fromUser = message.getFromUser();
+        this.toUser = message.getToUser();
     }
 
     public String getFromUser() {
@@ -45,19 +38,27 @@ public class MsgResult {
         this.toUser = toUser;
     }
 
-    public String getMsgType() {
-        return msgType;
+    public Integer getCode() {
+        return code;
     }
 
-    public void setMsgType(String msgType) {
-        this.msgType = msgType;
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
-    public String getContent() {
-        return content;
+    public String getMsgId() {
+        return msgId;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setMsgId(String msgId) {
+        this.msgId = msgId;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 }
