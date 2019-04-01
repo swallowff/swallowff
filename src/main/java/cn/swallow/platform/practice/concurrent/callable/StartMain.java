@@ -3,6 +3,7 @@ package cn.swallow.platform.practice.concurrent.callable;
 import cn.swallow.platform.core.util.GsonHelper;
 import cn.swallow.platform.practice.concurrent.callable.entity.MsgResult;
 import cn.swallow.platform.practice.concurrent.callable.threads.CallableThread;
+import javafx.util.Builder;
 
 import java.util.concurrent.*;
 
@@ -17,5 +18,6 @@ public class StartMain {
         Callable<MsgResult> callable = new CallableThread();
         Future<MsgResult> future = executorService.submit(callable);
         System.out.println(GsonHelper.toJson(future.get()));
+
     }
 }

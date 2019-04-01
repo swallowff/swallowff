@@ -3,7 +3,6 @@ package cn.swallow.platform.practice.concurrent.callable.threads;
 import cn.swallow.platform.practice.common.factory.SingletonFactory;
 import cn.swallow.platform.practice.common.service.MessageService;
 import cn.swallow.platform.practice.common.service.impl.AliMessageService;
-import cn.swallow.platform.practice.concurrent.callable.entity.Message;
 import cn.swallow.platform.practice.concurrent.callable.entity.MsgResult;
 import cn.swallow.platform.practice.concurrent.callable.entity.TextMessage;
 

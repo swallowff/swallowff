@@ -145,6 +145,13 @@ public class ShiroConfig {
 //        hashMap.put("/blog","blog");
         hashMap.put("/openApi/**", "anon");
         hashMap.put("/admin/login", "anon");
+        hashMap.put("/admin/swaggerApi/**","anon");
+        //放行swagger2
+        hashMap.put("/swagger-ui.html","anon");
+        hashMap.put("/swagger-resources","anon");
+        hashMap.put("/v2/api-docs","anon");
+        hashMap.put("/webjars/springfox-swagger-ui/**","anon");
+
         hashMap.put("/global/**", "anon");
         hashMap.put("/kaptcha", "anon");
         hashMap.put("/admin/**", "user");

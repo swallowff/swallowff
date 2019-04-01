@@ -6,7 +6,7 @@ import cn.swallow.platform.practice.designpattern.serviceprovider.inf.MessageSer
 /**
  * 服务提供者模型，使用了静态工厂方法
  */
-public class ProviderServiceMain {
+public class StartMain {
 
     public static void main(String[] args){
         MessageManager.registerDefaultProvider(new AliMessageServiceProvider());

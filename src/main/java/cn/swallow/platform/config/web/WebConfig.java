@@ -1,16 +1,25 @@
 package cn.swallow.platform.config.web;
 
+import cn.swallow.platform.config.properties.SwallowProperties;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Properties;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+    @Autowired
+    private SwallowProperties swallowProperties;
+
     /**
      * 注册拦截器
      * @param registry
@@ -41,4 +50,16 @@ public class WebConfig implements WebMvcConfigurer {
         defaultKaptcha.setConfig(config);
         return defaultKaptcha;
     }
+
+    /**
+     * 增加swagger的支持
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        if (swallowProperties.getSwaggerOpen()) {
+            registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+            registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        }
+    }
+
 }

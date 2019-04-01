@@ -1,6 +1,7 @@
 package cn.swallow.platform.modular.system.controller;
 
 import cn.swallow.platform.config.properties.SwallowProperties;
+import cn.swallow.platform.core.common.controller.BaseController;
 import cn.swallow.platform.core.common.controller.SwallowErrorView;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "${swallow.path.admin}/test")
-public class TestController {
+public class TestController extends BaseController {
 
     @RequestMapping(value = "index")
     public String toIndexPage(HttpServletRequest request, Model model){
@@ -39,5 +40,10 @@ public class TestController {
         modelAndView.setViewName("index");
         modelAndView.addObject("msg","hello");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "swagger")
+    public String swagger(){
+        return "swagger-ui";
     }
 }

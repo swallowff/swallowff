@@ -17,6 +17,9 @@ public class SwallowProperties {
 
     private Boolean kaptchaOpen = false;
 
+    private Boolean swaggerOpen = false;
+
+
     /**
      * session 失效时间（默认为30分钟 单位：秒）
      */
@@ -65,5 +68,13 @@ public class SwallowProperties {
 
     public void setKaptchaOpen(Boolean kaptchaOpen) {
         this.kaptchaOpen = kaptchaOpen;
+    }
+
+    public Boolean getSwaggerOpen() {
+        return swaggerOpen;
+    }
+
+    public void setSwaggerOpen(Boolean swaggerOpen) {
+        this.swaggerOpen = swaggerOpen;
     }
 }
