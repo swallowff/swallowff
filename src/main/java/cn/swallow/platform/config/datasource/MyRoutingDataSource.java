@@ -10,8 +10,8 @@ public class MyRoutingDataSource extends AbstractRoutingDataSource {
 
     @Override
     protected Object determineCurrentLookupKey() {
-        String typeKey = DataSourceHolder.getDataSourceType();
-        // 写
+        String typeKey = DataSourceContextHolder.getDataSourceType();
+
         if (typeKey.equals(DataSourceType.WRITE.getType())) {
             return DataSourceType.WRITE.getType();
         }else {

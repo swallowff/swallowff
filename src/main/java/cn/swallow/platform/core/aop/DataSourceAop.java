@@ -1,7 +1,6 @@
 package cn.swallow.platform.core.aop;
 
-import cn.swallow.platform.config.datasource.DataSourceHolder;
-import org.aspectj.lang.JoinPoint;
+import cn.swallow.platform.config.datasource.DataSourceContextHolder;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -33,13 +32,13 @@ public class DataSourceAop {
 
     @Before("readDataSourcePointCut()")
     public void setReadDataSourceType() {
-        DataSourceHolder.read();
+        DataSourceContextHolder.read();
         logger.info("dataSource 切换到：Read");
     }
 
     @Before("writeDataSourcePointCut()")
     public void setWriteDataSourceType() {
-        DataSourceHolder.write();
+        DataSourceContextHolder.write();
         logger.info("dataSource 切换到：Write");
     }
 

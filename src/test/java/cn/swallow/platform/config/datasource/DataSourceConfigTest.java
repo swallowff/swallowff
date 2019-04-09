@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SingleDataSourceConfigTest {
+public class DataSourceConfigTest {
 
     @Test
     public void dynamicDatasourceTest() throws Exception{

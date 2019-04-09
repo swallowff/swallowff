@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
  * @author shenyu
  * @create 2019/4/8
  */
-public class DataSourceHolder {
-    private static Logger logger = LoggerFactory.getLogger(DataSourceHolder.class);
+public class DataSourceContextHolder {
+    private static Logger logger = LoggerFactory.getLogger(DataSourceContextHolder.class);
 
     // 数据源名称线程池
     private static final ThreadLocal<String> local = new ThreadLocal<String>();

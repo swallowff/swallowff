@@ -42,7 +42,7 @@ import java.util.Map;
 @ConditionalOnProperty(prefix = "swallow.muti-datasource", name = "open", havingValue = "false", matchIfMissing = true)
 @EnableTransactionManagement
 @MapperScan(basePackages = {"cn.swallow.platform.modular.*.dao"})
-public class SingleDataSourceConfig {
+public class DataSourceConfig {
     @Value("${spring.master-datasource.type}")
     private Class<? extends DataSource> dataSourceType;
     @Value("${mybatis.type-aliases-package}")
