@@ -1,27 +1,40 @@
-package cn.swallow.platform.modular.system.dto;
+package cn.swallow.platform.modular.api.reqresp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
-import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 import java.util.Date;
 
-public class UserDto implements Serializable {
+/**
+ * @author shenyu
+ * @create 2019/4/2
+ */
+@ApiModel(description = "用户")
+public class UserDto {
+    private Integer id;
     private String avatar;  //头像
-    @NotBlank(message = "miss param account")
+    @ApiModelProperty(value = "用户ID",required = true)
     private String account; //用户名
-    @NotBlank(message = "miss param password")
+    @ApiModelProperty(value = "密码",required = true)
     private String password; //密码
-    @NotBlank(message = "miss param name")
     private String name;    //姓名
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date birthday;  //出生日期
     private Integer sex;    //性别
     private String email;   //电子邮箱
+    @ApiModelProperty(value = "手机号",required = true,example = "13647617481")
     private String phone;   //手机号
     private String roleId; //角色id
     private Integer deptId; //部门id
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getAvatar() {
         return avatar;

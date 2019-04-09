@@ -3,6 +3,8 @@ package cn.swallow.platform.config.web;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -35,9 +37,8 @@ public class Swagger2Config {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Spring Boot中使用Swagger2构建RESTful APIs")
-                .description("更多请关注http://www.baidu.com")
-                .termsOfServiceUrl("http://www.baidu.com")
-                .contact("shenyu")
+                .description("更多请关注http://blog.helloccs.cn")
+                .termsOfServiceUrl("http://blog.helloccs.cn")
                 .version("1.0")
                 .build();
 
