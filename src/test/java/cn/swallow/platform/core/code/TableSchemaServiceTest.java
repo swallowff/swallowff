@@ -1,5 +1,6 @@
 package cn.swallow.platform.core.code;
 
+import cn.swallow.platform.Application;
 import cn.swallow.platform.core.util.GsonHelper;
 import cn.swallow.platform.core.util.SpringContextHolder;
 import org.junit.Test;
@@ -14,7 +15,8 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class)
 public class TableSchemaServiceTest {
 
     @Test

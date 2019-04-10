@@ -1,5 +1,6 @@
 package cn.swallow.platform.core.util;
 
+import cn.swallow.platform.config.datasource.MyRoutingDataSource;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -13,12 +14,12 @@ import java.sql.SQLException;
 public class JdbcUtil {
 
     public static Connection getConnection() throws SQLException {
-        DruidDataSource dataSource = SpringContextHolder.getBean(DruidDataSource.class);
+        MyRoutingDataSource dataSource = SpringContextHolder.getBean(MyRoutingDataSource.class);
         return dataSource.getConnection();
     }
 
     public static JdbcTemplate getJdbcTemplate(Boolean lazyInit){
-        DruidDataSource dataSource = SpringContextHolder.getBean(DruidDataSource.class);
+        MyRoutingDataSource dataSource = SpringContextHolder.getBean(MyRoutingDataSource.class);
         return new JdbcTemplate(dataSource,lazyInit);
     }
 }

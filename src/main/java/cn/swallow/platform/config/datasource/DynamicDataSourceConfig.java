@@ -20,29 +20,27 @@ import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
-//druid数据源配置
+/**
+ * Druid读写分离数据源配置
+ */
 @Configuration
-@ConditionalOnProperty(prefix = "swallow.muti-datasource", name = "open", havingValue = "false", matchIfMissing = true)
 @EnableTransactionManagement
+@ConditionalOnProperty(prefix = "swallow.muti-datasource", name = "open", havingValue = "true")
 @MapperScan(basePackages = {"cn.swallow.platform.modular.*.dao"})
-public class DataSourceConfig {
+public class DynamicDataSourceConfig {
     @Value("${spring.master-datasource.type}")
     private Class<? extends DataSource> dataSourceType;
     @Value("${mybatis.type-aliases-package}")
@@ -50,20 +48,21 @@ public class DataSourceConfig {
     @Value("${mybatis.mapper-locations}")
     private String mapperLocations;
 
-    //druid配置
+    //master数据源配置
     @Bean(name = "masterDruidProperties")
     @ConfigurationProperties(prefix = "spring.master-datasource")
     public DruidProperties druidProperties() {
         return new DruidProperties();
     }
 
+    //slave数据源配置
     @Bean(name = "slaveDruidProperties")
     @ConfigurationProperties(prefix = "spring.slave-datasource")
     public DruidProperties slaveDruidProperties(){
         return new DruidProperties();
     }
 
-    public DruidDataSource dataSource(DruidProperties druidProperties) {
+    public DruidDataSource writedataSource(DruidProperties druidProperties) {
         DruidDataSource dataSource = new DruidDataSource();
         druidProperties.config(dataSource);
         return dataSource;
@@ -75,17 +74,26 @@ public class DataSourceConfig {
         return readDataSource;
     }
 
+    /**
+     * dataSource路由,配合Spring-aop使不同的mapper方法使用不同的数据源
+     * @return
+     */
     @Bean
     public MyRoutingDataSource routingDataSource(){
         MyRoutingDataSource myRoutingDataSource = new MyRoutingDataSource();
         Map<Object,Object> dataSourceMap = new HashMap<>();
         dataSourceMap.put(DataSourceType.READ.getType(),readDataSource(slaveDruidProperties()));
-        dataSourceMap.put(DataSourceType.WRITE.getType(),dataSource(druidProperties()));
+        dataSourceMap.put(DataSourceType.WRITE.getType(), writedataSource(druidProperties()));
         myRoutingDataSource.setTargetDataSources(dataSourceMap);
-//        DataSource dataSource = DataSourceBuilder.create().type(dataSourceType).build();
-        return myRoutingDataSource;
+//        DataSource writedataSource = DataSourceBuilder.create().type(dataSourceType).build();
+        return myRoutingDataSource;G
     }
 
+    /**
+     * 多数据源情况下需要手动配置sqlSessionFactory
+     * @return
+     * @throws Exception
+     */
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception{
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();

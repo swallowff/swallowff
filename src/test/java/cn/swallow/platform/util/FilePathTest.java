@@ -12,13 +12,13 @@ public class FilePathTest {
 
     @Test
     public void fileTest() throws Exception{
-        String path = "src/main/demo";
+        String path = "src"+File.separator+"main"+File.separator+"demo";
         File file = new File(path);
 
         if (!file.exists()){
             file.mkdir();
         }else {
-            new File(path+"/test.txt").createNewFile();
+            new File(path+File.separator+"test.txt").createNewFile();
         }
 
         System.out.println(file.getAbsolutePath());
@@ -32,10 +32,4 @@ public class FilePathTest {
         System.out.println(path);
     }
 
-    @Test
-    public void optionalTest(){
-        String input = null;
-        String result = Optional.ofNullable(input).orElse("2");
-        System.out.println(result);
-    }
 }
