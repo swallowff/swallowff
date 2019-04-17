@@ -8,8 +8,8 @@ import java.util.Collections;
  */
 public class JedisDistributedLockTools {
     private static final String LOCK_SUCCESS = "OK";
-    private static final String SET_IF_NOT_EXIST = "NX";
-    private static final String SET_WITH_EXPIRE_TIME = "PX";
+    private static final String SET_IF_NOT_EXIST = "NX";  //NX:当key不存在时才进行set XX:当key存在时进行set
+    private static final String EXPIRE_TIME_UNIT = "PX";    //EX:秒  PX:毫秒
 
     private static final Long RELEASE_SUCCESS = 1L;
 
@@ -21,7 +21,7 @@ public class JedisDistributedLockTools {
      * @return
      */
     public static boolean tryGetDistributeLock(String lockKey,String requestId,int expireTime){
-        String result = JedisUtil.getClient().set(lockKey, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expireTime);
+        String result = JedisUtil.getClient().set(lockKey, requestId, SET_IF_NOT_EXIST, EXPIRE_TIME_UNIT, expireTime);
         if (LOCK_SUCCESS.equals(result)) {
             return true;
         }

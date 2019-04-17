@@ -1,6 +1,7 @@
 package cn.swallow.platform.modular.system.entity;
 
 import cn.swallow.platform.core.common.entity.BaseEntity;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.Date;
 
@@ -12,19 +13,19 @@ public class LoginLog extends BaseEntity<LoginLog> {
     /**
      * 日志名称
      */
-    private String logname;
+    private String logName;
     /**
      * 管理员id
      */
-    private Integer userid;
+    private Integer userId;
     /**
      * 创建时间
      */
-    private Date createtime;
+    private Date createTime;
     /**
      * 是否执行成功
      */
-    private String succeed;
+    private Boolean succeed;
     /**
      * 具体消息
      */
@@ -35,35 +36,37 @@ public class LoginLog extends BaseEntity<LoginLog> {
     private String ip;
 
 
-    public String getLogname() {
-        return logname;
+    public String getLogName() {
+        return logName;
     }
 
-    public void setLogname(String logname) {
-        this.logname = logname;
+    public void setLogName(String logName) {
+        this.logName = logName;
     }
 
-    public Integer getUserid() {
-        return userid;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    @Override
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    @Override
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public String getSucceed() {
+    public Boolean getSucceed() {
         return succeed;
     }
 
-    public void setSucceed(String succeed) {
+    public void setSucceed(Boolean succeed) {
         this.succeed = succeed;
     }
 

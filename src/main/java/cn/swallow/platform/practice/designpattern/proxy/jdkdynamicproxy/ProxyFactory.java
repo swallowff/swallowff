@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
 /**
- * 代理工厂,可以创建任何的代理对象
+ * 代理工厂,可以创建任何代理对象
  * @author shenyu
  * @create 2019/3/30
  */

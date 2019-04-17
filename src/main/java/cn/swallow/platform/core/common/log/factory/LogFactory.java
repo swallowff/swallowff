@@ -17,13 +17,13 @@ public class LogFactory {
      */
     public static OperationLog createOperationLog(LogType logType, Integer userId, String bussinessName, String clazzName, String methodName, String msg, LogSucceed succeed) {
         OperationLog operationLog = new OperationLog();
-        operationLog.setLogtype(logType.getMessage());
+        operationLog.setLogType(logType.getMessage());
         operationLog.setLogname(bussinessName);
-        operationLog.setUserid(userId);
-        operationLog.setClassname(clazzName);
+        operationLog.setUserId(userId);
+        operationLog.setClassName(clazzName);
         operationLog.setMethod(methodName);
-        operationLog.setCreatetime(new Date());
-        operationLog.setSucceed(succeed.getMessage());
+        operationLog.setCreateTime(new Date());
+        operationLog.setSucceed(true);
         operationLog.setMessage(msg);
         return operationLog;
     }
@@ -33,10 +33,10 @@ public class LogFactory {
      */
     public static LoginLog createLoginLog(LogType logType, Integer userId, String msg, String ip) {
         LoginLog loginLog = new LoginLog();
-        loginLog.setLogname(logType.getMessage());
-        loginLog.setUserid(userId);
-        loginLog.setCreatetime(new Date());
-        loginLog.setSucceed(LogSucceed.SUCCESS.getMessage());
+        loginLog.setLogName(logType.getMessage());
+        loginLog.setUserId(userId);
+        loginLog.setCreateTime(new Date());
+        loginLog.setSucceed(true);
         loginLog.setIp(ip);
         loginLog.setMessage(msg);
         return loginLog;

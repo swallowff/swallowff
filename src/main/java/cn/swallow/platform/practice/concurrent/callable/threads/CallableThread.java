@@ -7,6 +7,7 @@ import cn.swallow.platform.practice.concurrent.callable.entity.MsgResult;
 import cn.swallow.platform.practice.concurrent.callable.entity.TextMessage;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 /**
  * @author shenyu
@@ -17,5 +18,6 @@ public class CallableThread implements Callable<MsgResult> {
     public MsgResult call() throws Exception {
         MessageService messageService = SingletonFactory.getInstace(AliMessageService.class);
         return messageService.sendMsg(new TextMessage("你好",0,"FromUser","ToUser"));
+
     }
 }

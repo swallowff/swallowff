@@ -1,7 +1,5 @@
 package cn.swallow.platform.practice.base.annotation;
 
-import org.springframework.stereotype.Component;
-
 /**
  * 使用SpringIoc
  * @author shenyu

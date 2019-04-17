@@ -60,15 +60,15 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AccountException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public String account(AccountException e, Model model,HttpServletRequest request) {
-        String username = request.getParameter("username");
+        String account = request.getParameter("account");
         if (e instanceof DisabledAccountException){
-            LogManager.me().executeLog(LogTaskFactory.loginLog(username, "账号被冻结", HttpContext.getIp()));
+            LogManager.me().executeLog(LogTaskFactory.loginLog(account, "账号被冻结", HttpContext.getIp()));
             model.addAttribute("tips", "账号被冻结");
         }else if (e instanceof UnknownAccountException){
-            LogManager.me().executeLog(LogTaskFactory.loginLog(username, "账户不存在", HttpContext.getIp()));
+            LogManager.me().executeLog(LogTaskFactory.loginLog(account, "账户不存在", HttpContext.getIp()));
             model.addAttribute("tips", "账户不存在");
         }else{
-            LogManager.me().executeLog(LogTaskFactory.loginLog(username, "账户未知", HttpContext.getIp()));
+            LogManager.me().executeLog(LogTaskFactory.loginLog(account, "账户未知", HttpContext.getIp()));
             model.addAttribute("tips", "账户未知");
         }
         return "/admin/login";
@@ -81,12 +81,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CredentialsException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public String credentials(CredentialsException e, Model model) {
-        String username = HttpContext.getRequest().getParameter("username");
+        String account = HttpContext.getRequest().getParameter("account");
         if (e instanceof ExpiredCredentialsException){
-            LogManager.me().executeLog(LogTaskFactory.loginLog(username, "凭证过期", HttpContext.getIp()));
+            LogManager.me().executeLog(LogTaskFactory.loginLog(account, "凭证过期", HttpContext.getIp()));
             model.addAttribute("tips", "凭证过期");
         }else if (e instanceof IncorrectCredentialsException){
-            LogManager.me().executeLog(LogTaskFactory.loginLog(username, "密码错误", HttpContext.getIp()));
+            LogManager.me().executeLog(LogTaskFactory.loginLog(account, "密码错误", HttpContext.getIp()));
             model.addAttribute("tips", "密码错误");
         }
         return "/admin/login";
@@ -98,8 +98,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidKaptchaException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String credentials(InvalidKaptchaException e, Model model) {
-        String username = HttpContext.getRequest().getParameter("username");
-        LogManager.me().executeLog(LogTaskFactory.loginLog(username, "验证码错误", HttpContext.getIp()));
+        String account = HttpContext.getRequest().getParameter("account");
+        LogManager.me().executeLog(LogTaskFactory.loginLog(account, "验证码错误", HttpContext.getIp()));
         model.addAttribute("tips", "验证码错误");
         return "/admin/login";
     }

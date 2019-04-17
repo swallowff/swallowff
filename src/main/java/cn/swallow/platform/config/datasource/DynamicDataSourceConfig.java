@@ -86,7 +86,7 @@ public class DynamicDataSourceConfig {
         dataSourceMap.put(DataSourceType.WRITE.getType(), writedataSource(druidProperties()));
         myRoutingDataSource.setTargetDataSources(dataSourceMap);
 //        DataSource writedataSource = DataSourceBuilder.create().type(dataSourceType).build();
-        return myRoutingDataSource;G
+        return myRoutingDataSource;
     }
 
     /**

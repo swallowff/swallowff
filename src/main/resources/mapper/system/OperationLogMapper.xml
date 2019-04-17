@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.swallow.platform.modular.system.dao.LoginLogMapper">
+<mapper namespace="cn.swallow.platform.modular.system.dao.OperationLogMapper">
 
     <sql id="baseColumns">
-        a.id AS id,
+        a.log_type AS logType,
         a.log_name AS logName,
         a.user_id AS userId,
+        a.class_name AS className,
+        a.method AS method,
         a.succeed AS succeed,
         a.message AS message,
-        a.ip AS ip,
-        a.birthday AS birthday,
         a.create_time AS createTime,
         a.update_time AS updateTime,
         a.version AS version
     </sql>
 
-    <select id="selectById" resultType="cn.swallow.platform.modular.system.entity.LoginLog">
+    <select id="selectById" resultType="cn.swallow.platform.modular.system.dao.OperationLogMapper">
       SELECT
       <include refid="baseColumns"/>
-      FROM sys_login_log a
+      FROM sys_operation_log a
       <where>
           a.id = #{id}
       </where>
     </select>
 
-    <select id="findList" resultType="cn.swallow.platform.modular.system.entity.LoginLog">
+    <select id="findList" resultType="cn.swallow.platform.modular.system.dao.OperationLogMapper">
         SELECT
         <include refid="baseColumns"/>
-        FROM sys_login_log a
+        FROM sys_operation_log a
         <where>
             <if test="logName != null and logName != ''">
               AND a.log_name = #{logName}
@@ -37,9 +37,6 @@
             </if>
             <if test="succeed != null and succeed != ''">
                 AND a.succeed = #{succeed}
-            </if>
-            <if test="ip != null and ip != ''">
-                AND a.ip = #{ip}
             </if>
         </where>
         <choose>
@@ -53,21 +50,25 @@
     </select>
 
     <insert id="insert">
-        INSERT INTO sys_login_log(
+        INSERT INTO sys_operation_log(
           log_name,
+          log_type,
           user_id,
+          class_name,
+          method,
           succeed,
           message,
-          ip,
           create_time,
           update_time,
           version
         ) VALUES (
           #{logName},
+          #{logType},
           #{userId},
+          #{className},
+          #{method},
           #{succeed},
           #{message},
-          #{ip},
           #{createTime},
           #{updateTime},
           #{version}
@@ -75,12 +76,14 @@
     </insert>
 
     <update id="update">
-        UPDATE sys_login_log SET
+        UPDATE sys_operation_log SET
+          log_type = #{logType},
           log_name = #{logName},
           user_id = #{userId},
+          class_name = #{className},
+          method = #{method},
           succeed = #{succeed},
           message = #{message},
-          ip = #{ip},
           create_time = #{createTime},
           update_time = #{updateTime},
           version = #{version}
@@ -90,8 +93,11 @@
     </update>
 
     <update id="updateSelective">
-        UPDATE sys_login_log
+        UPDATE sys_operation_log
         <set>
+            <if test="logType != null and logType != ''">
+                log_type = #{logType}
+            </if>
             <if test="logName != null and logName != ''">
                 log_name = #{logName}
             </if>
@@ -101,11 +107,14 @@
             <if test="succeed != null and succeed != ''">
                 succeed = #{succeed}
             </if>
+            <if test="className != null and className != ''">
+                class_name = #{className}
+            </if>
+            <if test="method != null and method != ''">
+                method = #{method}
+            </if>
             <if test="message != null and message != ''">
                 message = #{message}
-            </if>
-            <if test="ip != null and ip != ''">
-                ip = #{ip}
             </if>
             <if test="createTime != null and createTime != ''">
                 create_time = #{createTime}
@@ -123,7 +132,7 @@
     </update>
 
     <delete id="delete">
-        DELETE FROM sys_login_log a
+        DELETE FROM sys_operation_log a
         <where>
           a.id = #{id}
         </where>

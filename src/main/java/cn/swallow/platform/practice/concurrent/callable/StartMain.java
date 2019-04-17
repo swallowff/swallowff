@@ -19,5 +19,9 @@ public class StartMain {
         Future<MsgResult> future = executorService.submit(callable);
         System.out.println(GsonHelper.toJson(future.get()));
 
+//        FutureTask<MsgResult> task = new FutureTask<MsgResult>(new CallableThread());
+//        new Thread(task,"有返回的线程池").start();
+//        MsgResult result = task.get();
+//        System.out.println(result);
     }
 }

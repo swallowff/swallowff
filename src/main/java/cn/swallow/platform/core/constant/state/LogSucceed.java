@@ -6,20 +6,20 @@ package cn.swallow.platform.core.constant.state;
  */
 public enum LogSucceed {
 
-    SUCCESS("成功"),
-    FAIL("失败");
+    SUCCESS(true),
+    FAIL(false);
 
-    String message;
+    Boolean code;
 
-    LogSucceed(String message) {
-        this.message = message;
+    LogSucceed(Boolean code) {
+        this.code = code;
     }
 
-    public String getMessage() {
-        return message;
+    public Boolean getCode() {
+        return code;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setCode(Boolean code) {
+        this.code = code;
     }
 }

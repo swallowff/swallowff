@@ -12,7 +12,7 @@ public class OperationLog extends BaseEntity<OperationLog> {
     /**
      * 日志类型
      */
-    private String logtype;
+    private String logType;
     /**
      * 日志名称
      */
@@ -20,34 +20,30 @@ public class OperationLog extends BaseEntity<OperationLog> {
     /**
      * 用户id
      */
-    private Integer userid;
+    private Integer userId;
     /**
      * 类名称
      */
-    private String classname;
+    private String className;
     /**
      * 方法名称
      */
     private String method;
     /**
-     * 创建时间
-     */
-    private Date createtime;
-    /**
      * 是否成功
      */
-    private String succeed;
+    private Boolean succeed;
     /**
      * 备注
      */
     private String message;
 
-    public String getLogtype() {
-        return logtype;
+    public String getLogType() {
+        return logType;
     }
 
-    public void setLogtype(String logtype) {
-        this.logtype = logtype;
+    public void setLogType(String logType) {
+        this.logType = logType;
     }
 
     public String getLogname() {
@@ -58,20 +54,20 @@ public class OperationLog extends BaseEntity<OperationLog> {
         this.logname = logname;
     }
 
-    public Integer getUserid() {
-        return userid;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getClassname() {
-        return classname;
+    public String getClassName() {
+        return className;
     }
 
-    public void setClassname(String classname) {
-        this.classname = classname;
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public String getMethod() {
@@ -82,19 +78,11 @@ public class OperationLog extends BaseEntity<OperationLog> {
         this.method = method;
     }
 
-    public Date getCreatetime() {
-        return createtime;
-    }
-
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
-    }
-
-    public String getSucceed() {
+    public Boolean getSucceed() {
         return succeed;
     }
 
-    public void setSucceed(String succeed) {
+    public void setSucceed(Boolean succeed) {
         this.succeed = succeed;
     }
 
