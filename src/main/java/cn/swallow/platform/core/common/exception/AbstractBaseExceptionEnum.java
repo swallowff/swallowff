@@ -1,6 +1,6 @@
 package cn.swallow.platform.core.common.exception;
 
-import cn.swallow.platform.core.common.AbstractState;
+import cn.swallow.platform.core.common.state.AbstractState;
 
 /**
  * @author shenyu

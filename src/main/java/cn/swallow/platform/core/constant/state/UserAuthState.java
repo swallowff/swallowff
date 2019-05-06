@@ -1,6 +1,6 @@
 package cn.swallow.platform.core.constant.state;
 
-import cn.swallow.platform.core.common.AbstractState;
+import cn.swallow.platform.core.common.state.AbstractState;
 
 public enum  UserAuthState implements AbstractState {
     REPEAT_ACCOUNT(900,"用户名重复"),
