@@ -5,18 +5,18 @@ import cn.swallow.platform.core.common.page.Page;
 import java.util.Date;
 
 public class BaseEntity<T extends BaseEntity> {
-    private Integer id;
+    private Long id;
     private Date createTime;
     private Date updateTime;
     private Integer version;
     private String orderBy;
     private Page<T> page;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

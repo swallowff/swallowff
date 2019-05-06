@@ -20,6 +20,8 @@ import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -62,15 +64,15 @@ public class DynamicDataSourceConfig {
         return new DruidProperties();
     }
 
-    public DruidDataSource writedataSource(DruidProperties druidProperties) {
+    public DruidDataSource writedataSource(@Qualifier("masterDruidProperties") DruidProperties masterProperties) {
         DruidDataSource dataSource = new DruidDataSource();
-        druidProperties.config(dataSource);
+        masterProperties.config(dataSource);
         return dataSource;
     }
 
-    public DruidDataSource readDataSource(DruidProperties slaveDruidProperties){
+    public DruidDataSource readDataSource(@Qualifier("slaveDruidProperties") DruidProperties slaveProperties){
         DruidDataSource readDataSource = new DruidDataSource();
-        slaveDruidProperties.config(readDataSource);
+        slaveProperties.config(readDataSource);
         return readDataSource;
     }
 

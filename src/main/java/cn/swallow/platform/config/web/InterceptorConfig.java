@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  * @author shenyu
  * @create 2019/3/13
  */
+@Deprecated
 //@Configuration
 public class InterceptorConfig extends WebMvcConfigurationSupport {
 

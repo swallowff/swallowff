@@ -3,9 +3,12 @@ package cn.swallow.platform.modular.api.ctrl;
 import cn.swallow.platform.core.common.controller.BaseController;
 import cn.swallow.platform.core.common.exception.ServiceException;
 import cn.swallow.platform.core.common.reqresp.BaseResp;
+import cn.swallow.platform.core.shiro.ShiroKit;
+import cn.swallow.platform.core.shiro.ShiroUser;
 import cn.swallow.platform.modular.api.reqresp.TestReqModel;
 import cn.swallow.platform.modular.api.reqresp.TestRespModel;
 import io.swagger.annotations.*;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.security.Principal;
 
 /**
  * @author shenyu
@@ -37,6 +42,14 @@ public class OpenApiController extends BaseController {
         }
         TestRespModel testRespModel = new TestRespModel(1,"tom");
         return BaseResp.newSuccess().setData(testRespModel);
+    }
+
+    @RequestMapping("test")
+    @ResponseBody
+    public BaseResp test2(String id){
+        Subject subject = ShiroKit.getSubject();
+        ShiroUser shiroUser = ShiroKit.getUser();
+        return BaseResp.newSuccess().setData(shiroUser.getName());
     }
 
 

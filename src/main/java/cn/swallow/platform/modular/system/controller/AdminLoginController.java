@@ -89,9 +89,11 @@ public class AdminLoginController extends BaseController {
 
     @RequestMapping("front")
     public String front(){
+        Subject subject = ShiroKit.getSubject();
 //        return "admin/blog/frontIndex";
         return "admin/index";
     }
+
 
     /**
      * 跳转到后台管理主页

@@ -3,7 +3,7 @@ server:
 
 swallow:
   muti-datasource:
-    open: false
+    open: true
   path:
     admin: admin
     api: openApi

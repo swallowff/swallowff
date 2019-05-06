@@ -20,7 +20,7 @@ public class OperationLog extends BaseEntity<OperationLog> {
     /**
      * 用户id
      */
-    private Integer userId;
+    private Long userId;
     /**
      * 类名称
      */
@@ -54,11 +54,11 @@ public class OperationLog extends BaseEntity<OperationLog> {
         this.logname = logname;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

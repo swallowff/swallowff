@@ -1,11 +1,8 @@
 package cn.swallow.platform.core.shiro;
 
-import cn.hutool.core.convert.Convert;
-import cn.swallow.platform.core.shiro.service.impl.UserRoleServiceImpl;
 import cn.swallow.platform.modular.system.entity.User;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +14,7 @@ public class ShiroUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer id;          // 主键ID
+    public Long id;          // 主键ID
     public String account;      // 账号
     public String name;         // 姓名
     public Integer deptId;      // 部门id
@@ -26,11 +23,11 @@ public class ShiroUser implements Serializable {
     public List<String> roleNames; // 角色名称集
 
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
