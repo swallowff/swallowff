@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @create 2019/3/14
  */
 @Controller
-@RequestMapping(value = "${swallow.path.admin}/role")
+@RequestMapping(value = "${adminPath}/role")
 public class RoleController extends BaseController {
     @Autowired
     private RoleService roleService;

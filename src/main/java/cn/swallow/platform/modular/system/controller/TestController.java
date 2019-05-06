@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "${swallow.path.admin}/test")
+@RequestMapping(value = "${adminPath}/test")
 public class TestController extends BaseController {
 
     @RequestMapping(value = "index")

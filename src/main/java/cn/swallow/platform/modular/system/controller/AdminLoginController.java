@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
+@RequestMapping("${adminPath}")
 public class AdminLoginController extends BaseController {
     @Autowired
     private NoticeService noticeService;
@@ -37,18 +38,17 @@ public class AdminLoginController extends BaseController {
      * 登录页面跳转
      * @return
      */
-    @RequestMapping(value = "${swallow.path.admin}/login",method = RequestMethod.GET)
+    @RequestMapping(value = "login",method = RequestMethod.GET)
     public String login(Model model, HttpServletRequest request){
         //已登录,跳转至主页
         if (ShiroKit.isAuthenticated()){
             return REDIRECT + "/admin";
         } else {
-            model.addAttribute("beetl","beetl success");
             return "admin/login";
         }
     }
 
-    @RequestMapping(value = "${swallow.path.admin}/login",method = RequestMethod.POST)
+    @RequestMapping(value = "login",method = RequestMethod.POST)
     public String doLogin(@RequestParam(value = "account") String account,
                           @RequestParam(value = "password") String password, Boolean rememberme, String kaptcha, RedirectAttributes redirectAttributes, Model model){
         if (KaptchaUtil.getKaptchaOnOff()) {
@@ -60,17 +60,17 @@ public class AdminLoginController extends BaseController {
         }
         Subject subject = ShiroKit.getSubject();
         subject.login(new UsernamePasswordToken(account.trim(),password.trim(),rememberme == null ? false : rememberme));
-        return REDIRECT + "/admin";
+        return REDIRECT + "/";
     }
 
-    @RequestMapping(value = "${swallow.path.admin}/logout")
+    @RequestMapping(value = "logout")
     public String doLogout(){
         Subject subject = ShiroKit.getSubject();
         subject.logout();
-        return REDIRECT + "/admin/login";
+        return REDIRECT + "login";
     }
 
-    @RequestMapping(value = "${swallow.path.admin}/blackboard")
+    @RequestMapping(value = "blackboard")
     public String blackboard(Model model){
         ShiroUser shiroUser = ShiroKit.getUser();
         if (null != shiroUser){
@@ -79,28 +79,15 @@ public class AdminLoginController extends BaseController {
             List<Notice> notices = noticeService.findList(notice);
             model.addAttribute("noticeList",notices);
         }
-        return "/admin/blackboard";
+        return "admin/blackboard";
     }
-
-    @RequestMapping("/")
-    public String defaultPage(){
-        return "blog/login";
-    }
-
-    @RequestMapping("front")
-    public String front(){
-        Subject subject = ShiroKit.getSubject();
-//        return "admin/blog/frontIndex";
-        return "admin/index";
-    }
-
 
     /**
      * 跳转到后台管理主页
      * @param model
      * @return
      */
-    @RequestMapping("admin")
+    @RequestMapping("")
     public String index(Model model){
         return "admin/index";
     }

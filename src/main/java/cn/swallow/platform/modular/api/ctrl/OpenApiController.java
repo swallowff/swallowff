@@ -24,7 +24,7 @@ import java.security.Principal;
  * @create 2019/3/11
  */
 @Controller
-@RequestMapping(value = "${swallow.path.api}")
+@RequestMapping(value = "${apiPath}")
 @Api(tags = {"测试接口","测试接口2"},description = "这是一个测试的接口")
 public class OpenApiController extends BaseController {
 

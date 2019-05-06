@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @create 2019/4/2
  */
 @Controller
-@RequestMapping(value = "${swallow.path.api}/user")
+@RequestMapping(value = "${apiPath}/user")
 @Api(value = "用户api接口",tags = {"用户"},description = "接口描述")
 public class UserApiController extends BaseController {
     @Autowired

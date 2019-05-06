@@ -10,15 +10,18 @@ import org.springframework.web.servlet.View;
  * @create 2019/3/15
  */
 @Controller
-@RequestMapping("/global")
 public class GlobalController {
+    @RequestMapping("/")
+    public String blankPath(){
+        return "redirect:"+"admin";
+    }
 
     /**
      * 跳转到404页面
      *
      * @author fengshuonan
      */
-    @RequestMapping(path = "/error")
+    @RequestMapping(path = "/global/error")
     public View errorPage() {
         return new SwallowErrorView();
     }
@@ -28,7 +31,7 @@ public class GlobalController {
      *
      * @author fengshuonan
      */
-    @RequestMapping(path = "/sessionError")
+    @RequestMapping(path = "/global/sessionError")
     public String errorPageInfo(Model model) {
         model.addAttribute("tips", "session超时");
         return "/admin/login";
