@@ -5,8 +5,6 @@ import org.springframework.util.Assert;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import java.util.List;
-
 /**
  * @author shenyu
  * @create 2019/4/4

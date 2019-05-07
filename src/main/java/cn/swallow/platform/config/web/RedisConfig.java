@@ -1,7 +1,17 @@
 package cn.swallow.platform.config.web;
 
+import com.alibaba.druid.util.StringUtils;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -21,12 +31,55 @@ public class RedisConfig {
     private int timeout = 200;
     private int poolMaxIdle = 200;
     private int poolMaxTotal = 200;
+    private int database = 0;
+    private long maxWaitMillis=1500;
+    private boolean testOnBorrow=true;
+    private boolean testOnReturn=true;
 
     private JedisPoolConfig jedisPoolConfig(){
         JedisPoolConfig config = new JedisPoolConfig();
         config.setMaxIdle(poolMaxIdle);
         config.setMaxTotal(poolMaxTotal);
+        config.setMaxWaitMillis(maxWaitMillis);
+        config.setTestOnBorrow(testOnBorrow);
+        config.setTestOnReturn(testOnReturn);
         return config;
+    }
+
+    @Bean(name = "redisTemplate")
+    public StringRedisTemplate stringRedisTemplate() {
+        StringRedisTemplate template = new StringRedisTemplate();
+        return (StringRedisTemplate) getRedisTemplate(template);
+    }
+
+    public RedisTemplate getRedisTemplate(RedisTemplate template){
+        template.setConnectionFactory(connectionFactory());
+        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+        //序列化值时使用此序列化方法
+        template.setValueSerializer(jackson2JsonRedisSerializer);
+        template.afterPropertiesSet();
+        return template;
+    }
+
+    public RedisConnectionFactory connectionFactory() {
+        JedisConnectionFactory jedis = new JedisConnectionFactory();
+        jedis.setHostName(host);
+        jedis.setPort(port);
+        if (!StringUtils.isEmpty(password)) {
+            jedis.setPassword(password);
+        }
+        if (database != 0) {
+            jedis.setDatabase(database);
+        }
+        jedis.setPoolConfig(jedisPoolConfig());
+        // 初始化连接pool
+        jedis.afterPropertiesSet();
+        RedisConnectionFactory factory = jedis;
+        return factory;
     }
 
     public JedisPool getJedisPool(){
@@ -63,5 +116,21 @@ public class RedisConfig {
 
     public void setPoolMaxTotal(int poolMaxTotal) {
         this.poolMaxTotal = poolMaxTotal;
+    }
+
+    public void setDatabase(int database) {
+        this.database = database;
+    }
+
+    public void setMaxWaitMillis(long maxWaitMillis) {
+        this.maxWaitMillis = maxWaitMillis;
+    }
+
+    public void setTestOnBorrow(boolean testOnBorrow) {
+        this.testOnBorrow = testOnBorrow;
+    }
+
+    public void setTestOnReturn(boolean testOnReturn) {
+        this.testOnReturn = testOnReturn;
     }
 }

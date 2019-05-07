@@ -3,6 +3,7 @@ package cn.swallow.platform.core.util;
 import java.util.Collections;
 
 /**
+ * @description 简单版分布式锁工具 , 推荐使用Redission
  * @author shenyu
  * @create 2019/4/4
  */

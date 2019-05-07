@@ -1,7 +1,6 @@
 package cn.swallow.platform.core.util;
 
 import cn.swallow.platform.config.datasource.MyRoutingDataSource;
-import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.Connection;
