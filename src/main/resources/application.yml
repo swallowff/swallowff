@@ -11,6 +11,10 @@ swallow:
   kaptchaOpen: false                #是否开启后台登录验证码
   swagger-open: true
 
+http:
+  client:
+    pool:
+
 spring:
   redis:
       database: 0

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @create 2019/5/9
  */
 @Configuration
-@ConfigurationProperties(prefix = "httpClient.pool")
+@ConfigurationProperties(prefix = "http.client.pool")
 public class HttpClientConfig {
     // 连接池的最大连接数
     private int maxTotal = 200;
