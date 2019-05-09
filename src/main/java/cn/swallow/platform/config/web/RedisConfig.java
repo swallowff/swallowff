@@ -22,7 +22,7 @@ import redis.clients.jedis.JedisPoolConfig;
 @Configuration
 @ConfigurationProperties(prefix = RedisConfig.REDISCONF_PREFIX)
 public class RedisConfig {
-    public static final String REDISCONF_PREFIX = "redis";
+    public static final String REDISCONF_PREFIX = "spring.redis";
 
     private String host = "127.0.0.1";
     private int port = 6379;
