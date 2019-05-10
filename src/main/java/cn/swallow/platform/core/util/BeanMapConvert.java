@@ -16,16 +16,11 @@ import java.util.Map;
  */
 public class BeanMapConvert {
     /**
-     * Bean转换为Map
-     *
+     * bean转换为map
      * @param object
-     * @return String-Object的HashMap
-     *
-     * @author chenssy
-     * @date 2016-09-25
-     * @since v1.0.0
+     * @return
      */
-    public static Map<String,Object> bean2MapObject(Object object){
+    public static Map<String,Object> beanToMapObject(Object object){
         if(object == null){
             return null;
         }
@@ -53,19 +48,48 @@ public class BeanMapConvert {
     }
 
     /**
-     * Map转换为Java Bean
-     *
-     * @param map
-     *              待转换的Map
+     * bean转换为map
      * @param object
-     *              Java Bean
-     * @return java.lang.Object
-     *
-     * @author chenssy
-     * @date 2016-09-25
-     * @since v1.0.0
+     * @param camelToUnderLine true:bean的驼峰转换成map的下划线
+     * @return
      */
-    public static Object map2Bean(Map map,Object object){
+    public static Map<String,Object> beanToMapObject(Object object, boolean camelToUnderLine){
+        if(object == null){
+            return null;
+        }
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        try {
+            BeanInfo beanInfo = Introspector.getBeanInfo(object.getClass());
+            PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+            for (PropertyDescriptor property : propertyDescriptors) {
+                String key = property.getName();
+                // 过滤class属性
+                if (!key.equals("class")) {
+                    // 得到property对应的getter方法
+                    Method getter = property.getReadMethod();
+                    Object value = getter.invoke(object);
+
+                    if (camelToUnderLine){
+                        key = StringUtil.camelToUnderline(key);
+                    }
+                    map.put(key, value);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return map;
+    }
+
+    /**
+     * map转bean
+     * @param map
+     * @param object
+     * @return
+     */
+    public static Object mapToBean(Map map,Object object){
         if(map == null || object == null){
             return null;
         }
@@ -75,6 +99,43 @@ public class BeanMapConvert {
 
             for (PropertyDescriptor property : propertyDescriptors) {
                 String key = property.getName();
+                if (map.containsKey(key)) {
+                    Object value = map.get(key);
+                    // 得到property对应的setter方法
+                    Method setter = property.getWriteMethod();
+                    setter.invoke(object, value);
+                }
+            }
+        } catch (IntrospectionException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+
+    /**
+     *
+     * @param map
+     * @param object
+     * @param underLineToCamel true:map中的下划线转为object中的驼峰
+     * @return
+     */
+    public static Object mapToBean(Map map,Object object,boolean underLineToCamel){
+        if(map == null || object == null){
+            return null;
+        }
+        try {
+            BeanInfo beanInfo = Introspector.getBeanInfo(object.getClass());
+            PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+
+            for (PropertyDescriptor property : propertyDescriptors) {
+                String key = property.getName();
+                if (underLineToCamel){
+                    key = StringUtil.camelToUnderline(key);
+                }
                 if (map.containsKey(key)) {
                     Object value = map.get(key);
                     // 得到property对应的setter方法
