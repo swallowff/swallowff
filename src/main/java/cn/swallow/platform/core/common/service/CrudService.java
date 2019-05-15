@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
-@Service
 public abstract class CrudService<M extends CrudMapper<E>,E extends BaseEntity<E>> {
     @Autowired
     protected M crudMapper;
