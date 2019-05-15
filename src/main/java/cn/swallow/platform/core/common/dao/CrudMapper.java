@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Mapper
 public interface CrudMapper<E extends BaseEntity<E>> {
     E selectById(Integer id);
 
