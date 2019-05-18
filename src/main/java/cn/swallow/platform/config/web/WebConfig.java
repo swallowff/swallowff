@@ -1,9 +1,12 @@
 package cn.swallow.platform.config.web;
 
 import cn.swallow.platform.config.properties.SwallowProperties;
+import cn.swallow.platform.core.interceptor.HttpServletRequestFilter;
+import cn.swallow.platform.core.interceptor.WebApiInterceptor;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,13 +23,33 @@ public class WebConfig implements WebMvcConfigurer {
     @Autowired
     private SwallowProperties swallowProperties;
 
+
+
     /**
      * 注册拦截器
      * @param registry
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor();
+        registry.addInterceptor(new WebApiInterceptor()).addPathPatterns("/**");
+    }
+
+    /**
+     * 注册过滤器
+     * @return
+     */
+    @Bean
+    public FilterRegistrationBean refererFilterRegistration() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        //注入过滤器
+        registration.setFilter(new HttpServletRequestFilter());
+        //过滤规则
+        registration.addUrlPatterns("/*");
+        //过滤器名称
+        registration.setName("replaceHttpServlet");
+        //过滤器顺序
+        registration.setOrder(1);
+        return registration;
     }
 
     /**
