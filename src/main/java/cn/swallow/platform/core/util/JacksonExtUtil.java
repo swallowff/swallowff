@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -40,26 +40,24 @@ public class JacksonExtUtil {
         return jsonUtil;
     }
 
-    public void filter(Class<?> clazz, String include, String filter) {
+    public void filter(Class<?> clazz, String... filters) {
         if (clazz == null)
             return;
-        if (StringUtils.isNotBlank(include)) {
-            jacksonFilter.include(clazz, include.split(","));
-        }
-        if (StringUtils.isNotBlank(filter)) {
-            jacksonFilter.filter(clazz, filter.split(","));
+        if (ArrayUtils.isNotEmpty(filters)) {
+            jacksonFilter.filter(clazz, filters);
         }
         mapper.addMixIn(clazz, jacksonFilter.getClass());
     }
-    public void include(Class<?> clazz, String include, String filter) {
+
+    public void include(Class<?> clazz, String... includes) {
         if (clazz == null)
             return;
-        if (StringUtils.isNotBlank(include)) {
-            jacksonFilter.include(clazz, include.split(","));
+        if (ArrayUtils.isNotEmpty(includes)) {
+            jacksonFilter.include(clazz, includes);
         }
-        if (StringUtils.isNotBlank(filter)) {
-            jacksonFilter.filter(clazz, filter.split(","));
-        }
+//        if (StringUtils.isNotBlank(filter)) {
+//            jacksonFilter.filter(clazz, filter.split(","));
+//        }
         mapper.addMixIn(clazz, jacksonFilter.getClass());
     }
 
