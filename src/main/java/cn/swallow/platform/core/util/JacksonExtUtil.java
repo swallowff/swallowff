@@ -9,6 +9,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 /**
  * @author Administrator
@@ -19,11 +20,14 @@ public class JacksonExtUtil {
     private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private static final ObjectMapper mapper;
 
+    private static JacksonExtUtil INSTANCE = null;
+
     JacksonJsonFilter jacksonFilter = new JacksonJsonFilter();
 
     static {
         SimpleDateFormat dateFormat = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
         mapper = new ObjectMapper();
+        mapper.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         mapper.setDateFormat(dateFormat);
         // 允许对象忽略json中不存在的属性
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -32,12 +36,20 @@ public class JacksonExtUtil {
         // 允许出现单引号
         mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
         // 忽视为空的属性
+        mapper.configure(JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS, false);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
+    private JacksonExtUtil(){}
+
     public static JacksonExtUtil me() {
-        JacksonExtUtil jsonUtil = new JacksonExtUtil();
-        return jsonUtil;
+        if (null == INSTANCE){
+            INSTANCE = new JacksonExtUtil();
+            return INSTANCE;
+        }else {
+            return INSTANCE;
+        }
     }
 
     public void filter(Class<?> clazz, String... filters) {
@@ -55,9 +67,6 @@ public class JacksonExtUtil {
         if (ArrayUtils.isNotEmpty(includes)) {
             jacksonFilter.include(clazz, includes);
         }
-//        if (StringUtils.isNotBlank(filter)) {
-//            jacksonFilter.filter(clazz, filter.split(","));
-//        }
         mapper.addMixIn(clazz, jacksonFilter.getClass());
     }
 
