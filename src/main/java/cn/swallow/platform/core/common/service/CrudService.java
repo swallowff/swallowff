@@ -12,7 +12,7 @@ public abstract class CrudService<M extends CrudMapper<E>,E extends BaseEntity<E
     @Autowired
     protected M crudMapper;
 
-    public E selectById(Integer id){
+    public E selectById(String id){
         return crudMapper.selectById(id);
     }
 

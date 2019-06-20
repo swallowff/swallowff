@@ -24,8 +24,8 @@ public class UserServiceTest {
 
     @Test
     public void selectById(){
-        User user = userService.selectById(50);
-        logger.debug(GsonHelper.toJson(userService.selectById(50)));
+        User user = userService.selectById("50");
+        logger.debug(GsonHelper.toJson(userService.selectById("50")));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class UserServiceTest {
 
     @Test
     public void update(){
-        User user = userService.selectById(50);
+        User user = userService.selectById("50");
         user.setAccount("admin modify");
         userService.update(user);
     }

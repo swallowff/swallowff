@@ -22,7 +22,11 @@ public class RequestModel {
 
     private String reqUri;    //请求地址
 
+    private String reqMethod;   //请求方法
+
     private String reqParams;  //Json串
+
+    private String respMethod;  //返回方法
 
     private Object respParams;//返回值
 
@@ -120,5 +124,21 @@ public class RequestModel {
 
     public static void removeRequestModel(){
         REQUEST_MODEL.remove();
+    }
+
+    public String getReqMethod() {
+        return reqMethod;
+    }
+
+    public void setReqMethod(String reqMethod) {
+        this.reqMethod = reqMethod;
+    }
+
+    public String getRespMethod() {
+        return respMethod;
+    }
+
+    public void setRespMethod(String respMethod) {
+        this.respMethod = respMethod;
     }
 }

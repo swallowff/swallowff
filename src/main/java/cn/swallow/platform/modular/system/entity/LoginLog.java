@@ -17,11 +17,7 @@ public class LoginLog extends BaseEntity<LoginLog> {
     /**
      * 管理员id
      */
-    private Long userId;
-    /**
-     * 创建时间
-     */
-    private Date createTime;
+    private String userId;
     /**
      * 是否执行成功
      */
@@ -44,22 +40,12 @@ public class LoginLog extends BaseEntity<LoginLog> {
         this.logName = logName;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    @Override
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    @Override
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 
     public Boolean getSucceed() {

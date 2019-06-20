@@ -1,22 +1,25 @@
 package cn.swallow.platform.core.common.entity;
 
 import cn.swallow.platform.core.common.page.Page;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 
 public class BaseEntity<T extends BaseEntity> {
-    private Long id;
+    private String id;
     private Date createTime;
     private Date updateTime;
     private Integer version;
     private String orderBy;
     private Page<T> page;
+    private boolean isNewRecord;
+    private boolean deleted;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -58,5 +61,21 @@ public class BaseEntity<T extends BaseEntity> {
 
     public void setPage(Page<T> page) {
         this.page = page;
+    }
+
+    public boolean isNewRecord() {
+        return isNewRecord && StringUtils.isNotBlank(id);
+    }
+
+    public void setNewRecord(boolean newRecord) {
+        isNewRecord = newRecord;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }
