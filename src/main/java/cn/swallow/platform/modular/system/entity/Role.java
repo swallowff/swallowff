@@ -1,6 +1,6 @@
 package cn.swallow.platform.modular.system.entity;
 
-import cn.swallow.platform.core.common.entity.BaseEntity;
+import cn.swallow.platform.common.base.entity.BaseEntity;
 
 public class Role extends BaseEntity<Role> {
     private Integer sort;    //排序

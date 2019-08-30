@@ -1,8 +1,6 @@
 package cn.swallow.platform.modular.system.entity;
 
-import cn.swallow.platform.core.common.entity.BaseEntity;
-
-import java.util.Date;
+import cn.swallow.platform.common.base.entity.BaseEntity;
 
 /**
  * @author shenyu

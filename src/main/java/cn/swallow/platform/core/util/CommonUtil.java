@@ -1,7 +1,7 @@
 package cn.swallow.platform.core.util;
 
-import cn.swallow.platform.core.common.exception.ServiceException;
-import cn.swallow.platform.core.common.exception.constant.CoreExceptionEnum;
+import cn.swallow.platform.common.exception.ServiceException;
+import cn.swallow.platform.common.exception.constant.CoreExceptionEnum;
 
 import java.io.*;
 import java.nio.ByteBuffer;

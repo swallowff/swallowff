@@ -1,11 +1,11 @@
 package cn.swallow.platform.core.aop;
 
-import cn.swallow.platform.core.common.exception.constant.BizExceptionEnum;
-import cn.swallow.platform.core.common.exception.InvalidKaptchaException;
-import cn.swallow.platform.core.common.exception.ServiceException;
-import cn.swallow.platform.core.common.log.LogManager;
-import cn.swallow.platform.core.common.log.factory.LogTaskFactory;
-import cn.swallow.platform.core.common.reqresp.BaseResp;
+import cn.swallow.platform.common.exception.constant.BizExceptionEnum;
+import cn.swallow.platform.common.exception.InvalidKaptchaException;
+import cn.swallow.platform.common.exception.ServiceException;
+import cn.swallow.platform.common.log.LogManager;
+import cn.swallow.platform.common.log.factory.LogTaskFactory;
+import cn.swallow.platform.common.base.res.BaseResp;
 import cn.swallow.platform.core.shiro.ShiroKit;
 import cn.swallow.platform.core.util.http.HttpContext;
 import org.apache.shiro.authc.*;

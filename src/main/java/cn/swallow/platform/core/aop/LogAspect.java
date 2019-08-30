@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
 public class LogAspect {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Pointcut("@annotation(cn.swallow.platform.core.common.annotation.BusinessLog)")
+    @Pointcut("@annotation(cn.swallow.platform.common.annotation.BusinessLog)")
     public void log(){
 
     }

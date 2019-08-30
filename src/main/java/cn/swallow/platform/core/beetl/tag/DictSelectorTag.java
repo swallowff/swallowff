@@ -1,7 +1,7 @@
 package cn.swallow.platform.core.beetl.tag;
 
-import cn.swallow.platform.core.common.exception.constant.BizExceptionEnum;
-import cn.swallow.platform.core.common.exception.ServiceException;
+import cn.swallow.platform.common.exception.constant.BizExceptionEnum;
+import cn.swallow.platform.common.exception.ServiceException;
 import cn.swallow.platform.core.util.CommonUtil;
 import cn.swallow.platform.modular.system.entity.Dict;
 import cn.swallow.platform.modular.system.service.DictService;

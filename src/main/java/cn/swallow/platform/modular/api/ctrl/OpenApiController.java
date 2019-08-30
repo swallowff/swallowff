@@ -1,8 +1,7 @@
 package cn.swallow.platform.modular.api.ctrl;
 
-import cn.swallow.platform.core.common.controller.BaseController;
-import cn.swallow.platform.core.common.exception.ServiceException;
-import cn.swallow.platform.core.common.reqresp.BaseResp;
+import cn.swallow.platform.common.base.controller.BaseController;
+import cn.swallow.platform.common.base.res.BaseResp;
 import cn.swallow.platform.core.shiro.ShiroKit;
 import cn.swallow.platform.core.shiro.ShiroUser;
 import cn.swallow.platform.modular.api.reqresp.TestReqModel;
@@ -14,10 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.security.Principal;
 
 /**
  * @author shenyu

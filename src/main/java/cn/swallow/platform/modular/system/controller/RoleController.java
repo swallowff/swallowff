@@ -1,6 +1,6 @@
 package cn.swallow.platform.modular.system.controller;
 
-import cn.swallow.platform.core.common.controller.BaseController;
+import cn.swallow.platform.common.base.controller.BaseController;
 import cn.swallow.platform.modular.system.entity.Role;
 import cn.swallow.platform.modular.system.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;

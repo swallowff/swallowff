@@ -1,9 +1,6 @@
 package cn.swallow.platform.modular.system.entity;
 
-import cn.swallow.platform.core.common.entity.BaseEntity;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import java.util.Date;
+import cn.swallow.platform.common.base.entity.BaseEntity;
 
 /**
  * @author shenyu

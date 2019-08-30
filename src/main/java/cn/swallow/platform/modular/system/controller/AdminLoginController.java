@@ -1,8 +1,8 @@
 package cn.swallow.platform.modular.system.controller;
 
 import cn.hutool.core.util.StrUtil;
-import cn.swallow.platform.core.common.controller.BaseController;
-import cn.swallow.platform.core.common.exception.InvalidKaptchaException;
+import cn.swallow.platform.common.base.controller.BaseController;
+import cn.swallow.platform.common.exception.InvalidKaptchaException;
 import cn.swallow.platform.core.shiro.ShiroKit;
 import cn.swallow.platform.core.shiro.ShiroUser;
 import cn.swallow.platform.core.util.img.KaptchaUtil;
