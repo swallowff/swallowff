@@ -7,7 +7,7 @@ public interface UserRoleService {
      * @param roleId
      * @return
      */
-    public String getRoleName(Integer roleId);
+    public String getRoleName(String roleId);
 
 
 }

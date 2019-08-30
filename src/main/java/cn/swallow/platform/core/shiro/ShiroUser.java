@@ -14,7 +14,7 @@ public class ShiroUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Long id;          // 主键ID
+    public String id;          // 主键ID
     public String account;      // 账号
     public String name;         // 姓名
     public Integer deptId;      // 部门id
@@ -23,11 +23,11 @@ public class ShiroUser implements Serializable {
     public List<String> roleNames; // 角色名称集
 
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

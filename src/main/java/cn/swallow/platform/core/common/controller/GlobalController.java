@@ -13,7 +13,7 @@ import org.springframework.web.servlet.View;
 public class GlobalController {
     @RequestMapping("/")
     public String blankPath(){
-        return "redirect:"+"admin";
+        return "redirect:"+"/a";
     }
 
     /**

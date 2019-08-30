@@ -33,7 +33,7 @@ public class UserController extends BaseController {
     @BusinessLog
     @RequestMapping(value = "get",method = RequestMethod.POST)
     @ResponseBody
-    public BaseResp getUser(@RequestParam(name = "id") Integer id){
+    public BaseResp getUser(@RequestParam(name = "id") String id){
         BaseResp baseResp = BaseResp.newSuccess();
         User user = userService.selectById(id);
         if (null == user){

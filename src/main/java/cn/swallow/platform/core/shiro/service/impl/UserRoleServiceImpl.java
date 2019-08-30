@@ -15,7 +15,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     private RoleService roleService;
 
     @Override
-    public String getRoleName(Integer roleId) {
+    public String getRoleName(String roleId) {
         Role role = roleService.selectById(roleId);
         return role.getName();
     }

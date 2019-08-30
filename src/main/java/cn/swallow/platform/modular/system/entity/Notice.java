@@ -11,7 +11,7 @@ public class Notice extends BaseEntity<Notice> {
     private Integer type;
     private String content;
     private Integer creator;
-    private Long toUser;
+    private String toUser;
 
     public String getTittle() {
         return tittle;
@@ -45,11 +45,11 @@ public class Notice extends BaseEntity<Notice> {
         this.creator = creator;
     }
 
-    public Long getToUser() {
+    public String getToUser() {
         return toUser;
     }
 
-    public void setToUser(Long toUser) {
+    public void setToUser(String toUser) {
         this.toUser = toUser;
     }
 }

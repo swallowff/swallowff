@@ -11,10 +11,6 @@ import java.util.List;
 @Service
 public class UserService extends CrudService<UserMapper,User> {
 
-    public User selectById(Integer id){
-        return super.selectById(id);
-    }
-
     public User selectByAccount(String account){
         User user = new User();
         user.setAccount(account);

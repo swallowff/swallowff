@@ -26,7 +26,7 @@ public class RoleController extends BaseController {
     }
 
     @RequestMapping("detail")
-    public String getRole(@RequestParam("id") Integer id, Model model){
+    public String getRole(@RequestParam("id") String id, Model model){
         model.addAttribute("role",roleService.selectById(id));
         return "admin/system/roleDetail";
     }
