@@ -1,7 +1,6 @@
 package cn.swallow.platform.config.web;
 
-import cn.swallow.platform.core.util.ObjectUtil;
-import cn.swallow.platform.core.util.PooledHttpClientAdaptor;
+import cn.swallow.platform.core.util.http.PooledHttpClientAdaptor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

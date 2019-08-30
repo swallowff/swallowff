@@ -2,7 +2,7 @@ package cn.swallow.platform.system.service;
 
 import cn.hutool.core.date.DateUtil;
 import cn.swallow.platform.core.shiro.ShiroKit;
-import cn.swallow.platform.core.util.GsonHelper;
+import cn.swallow.platform.core.util.json.GsonHelper;
 import cn.swallow.platform.modular.system.entity.User;
 import cn.swallow.platform.modular.system.service.UserService;
 import cn.swallow.platform.Application;

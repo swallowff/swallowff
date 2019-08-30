@@ -11,27 +11,16 @@ public class RequestModel {
     private static final ThreadLocal<RequestModel> REQUEST_MODEL = new ThreadLocal<>();
 
     private String platform;    //平台
-
     private String version;     //版本
-
     private String product;     //产品
-
     private Long startMillis;   //开始时间
-
     private String sessionId;   //当前请求用户sessionId
-
-    private String reqUri;    //请求地址
-
-    private String reqMethod;   //请求方法
-
-    private String reqParams;  //Json串
-
-    private String respMethod;  //返回方法
-
-    private Object respParams;//返回值
-
-    private String httpMethod;//HTTP-POST
-
+    private String reqUri;      //请求地址
+    private String reqParams;   //Json串
+    private String reqContentType;  //请求的contentType
+    private Object respParams;  //返回值
+    private String respContentType; //返回的contentType
+    private String httpMethod;  //HTTP-POST
     private Date reqTime;       //请求时间
 
     public String getPlatform() {
@@ -126,19 +115,19 @@ public class RequestModel {
         REQUEST_MODEL.remove();
     }
 
-    public String getReqMethod() {
-        return reqMethod;
+    public String getReqContentType() {
+        return reqContentType;
     }
 
-    public void setReqMethod(String reqMethod) {
-        this.reqMethod = reqMethod;
+    public void setReqContentType(String reqContentType) {
+        this.reqContentType = reqContentType;
     }
 
-    public String getRespMethod() {
-        return respMethod;
+    public String getRespContentType() {
+        return respContentType;
     }
 
-    public void setRespMethod(String respMethod) {
-        this.respMethod = respMethod;
+    public void setRespContentType(String respContentType) {
+        this.respContentType = respContentType;
     }
 }

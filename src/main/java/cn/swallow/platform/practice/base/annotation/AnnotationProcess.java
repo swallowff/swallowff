@@ -1,6 +1,6 @@
 package cn.swallow.platform.practice.base.annotation;
 
-import cn.swallow.platform.core.util.SpringContextHolder;
+import cn.swallow.platform.core.util.context.SpringContextHolder;
 
 import java.util.Map;
 

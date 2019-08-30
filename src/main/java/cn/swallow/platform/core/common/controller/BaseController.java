@@ -1,7 +1,7 @@
 package cn.swallow.platform.core.common.controller;
 
 import cn.swallow.platform.core.common.reqresp.BaseResp;
-import cn.swallow.platform.core.util.HttpContext;
+import cn.swallow.platform.core.util.http.HttpContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

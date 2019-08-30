@@ -1,6 +1,6 @@
 package cn.swallow.platform.core.aop;
 
-import cn.swallow.platform.core.util.GsonHelper;
+import cn.swallow.platform.core.util.json.GsonHelper;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;

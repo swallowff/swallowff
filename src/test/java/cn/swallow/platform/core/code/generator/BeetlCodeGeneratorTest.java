@@ -1,7 +1,7 @@
 package cn.swallow.platform.core.code.generator;
 
 import cn.swallow.platform.core.code.AutoGenerator;
-import cn.swallow.platform.core.util.SpringContextHolder;
+import cn.swallow.platform.core.util.context.SpringContextHolder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

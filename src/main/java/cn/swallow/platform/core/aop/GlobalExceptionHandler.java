@@ -7,7 +7,7 @@ import cn.swallow.platform.core.common.log.LogManager;
 import cn.swallow.platform.core.common.log.factory.LogTaskFactory;
 import cn.swallow.platform.core.common.reqresp.BaseResp;
 import cn.swallow.platform.core.shiro.ShiroKit;
-import cn.swallow.platform.core.util.HttpContext;
+import cn.swallow.platform.core.util.http.HttpContext;
 import org.apache.shiro.authc.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

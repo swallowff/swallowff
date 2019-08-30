@@ -1,13 +1,9 @@
 package cn.swallow.platform.util;
 
-import cn.swallow.platform.core.util.GsonHelper;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-import org.apache.commons.lang3.StringUtils;
+import cn.swallow.platform.core.util.json.GsonHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.math.BigDecimal;
 
 /**
  * @author shenyu

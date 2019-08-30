@@ -1,5 +1,6 @@
 package cn.swallow.platform.core.util;
 
+import cn.swallow.platform.core.util.img.QRCodeUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

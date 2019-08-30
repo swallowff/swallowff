@@ -1,8 +1,6 @@
 package cn.swallow.platform.core.code;
 
 import cn.swallow.platform.core.util.JdbcUtil;
-import cn.swallow.platform.core.util.SpringContextHolder;
-import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;

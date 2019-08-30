@@ -1,6 +1,6 @@
 package cn.swallow.platform.config.datasource;
 
-import cn.swallow.platform.core.util.SpringContextHolder;
+import cn.swallow.platform.core.util.context.SpringContextHolder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,7 +1,7 @@
 package cn.swallow.platform.core.shiro.service.impl;
 
 import cn.swallow.platform.core.shiro.service.UserRoleService;
-import cn.swallow.platform.core.util.SpringContextHolder;
+import cn.swallow.platform.core.util.context.SpringContextHolder;
 import cn.swallow.platform.modular.system.entity.Role;
 import cn.swallow.platform.modular.system.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;

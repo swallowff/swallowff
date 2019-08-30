@@ -1,6 +1,6 @@
 package cn.swallow.platform.core.constant.factory;
 
-import cn.swallow.platform.core.util.SpringContextHolder;
+import cn.swallow.platform.core.util.context.SpringContextHolder;
 import cn.swallow.platform.modular.system.entity.Dict;
 import org.springframework.stereotype.Component;
 

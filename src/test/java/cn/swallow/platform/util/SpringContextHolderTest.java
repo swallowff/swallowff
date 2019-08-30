@@ -2,7 +2,7 @@ package cn.swallow.platform.util;
 
 import cn.hutool.core.date.DateUtil;
 import cn.swallow.platform.Application;
-import cn.swallow.platform.core.util.SpringContextHolder;
+import cn.swallow.platform.core.util.context.SpringContextHolder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

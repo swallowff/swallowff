@@ -3,7 +3,7 @@ package cn.swallow.platform.core.code.generator;
 import cn.swallow.platform.core.code.GeneratorConfigManager;
 import cn.swallow.platform.core.code.config.*;
 import cn.swallow.platform.core.code.entity.ColumnClass;
-import cn.swallow.platform.core.util.StreamUtil;
+import cn.swallow.platform.core.util.io.StreamUtil;
 import cn.swallow.platform.core.util.StringUtil;
 import org.beetl.core.Template;
 

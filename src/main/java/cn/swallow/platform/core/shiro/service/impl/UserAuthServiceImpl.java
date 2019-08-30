@@ -2,7 +2,7 @@ package cn.swallow.platform.core.shiro.service.impl;
 
 import cn.swallow.platform.core.shiro.ShiroUser;
 import cn.swallow.platform.core.shiro.service.UserAuthService;
-import cn.swallow.platform.core.util.SpringContextHolder;
+import cn.swallow.platform.core.util.context.SpringContextHolder;
 import cn.swallow.platform.modular.system.entity.User;
 import cn.swallow.platform.modular.system.service.UserService;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;

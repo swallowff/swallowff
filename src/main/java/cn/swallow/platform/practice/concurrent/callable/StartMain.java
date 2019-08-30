@@ -1,9 +1,8 @@
 package cn.swallow.platform.practice.concurrent.callable;
 
-import cn.swallow.platform.core.util.GsonHelper;
+import cn.swallow.platform.core.util.json.GsonHelper;
 import cn.swallow.platform.practice.concurrent.callable.entity.MsgResult;
 import cn.swallow.platform.practice.concurrent.callable.threads.CallableThread;
-import javafx.util.Builder;
 
 import java.util.concurrent.*;
 

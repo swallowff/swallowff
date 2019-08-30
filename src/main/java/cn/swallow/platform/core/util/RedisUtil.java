@@ -1,5 +1,6 @@
 package cn.swallow.platform.core.util;
 
+import cn.swallow.platform.core.util.context.SpringContextHolder;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.ScanOptions;

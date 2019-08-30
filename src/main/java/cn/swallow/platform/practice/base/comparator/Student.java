@@ -1,6 +1,6 @@
 package cn.swallow.platform.practice.base.comparator;
 
-import cn.swallow.platform.core.util.GsonHelper;
+import cn.swallow.platform.core.util.json.GsonHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;

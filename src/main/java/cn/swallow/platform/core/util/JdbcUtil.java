@@ -1,6 +1,7 @@
 package cn.swallow.platform.core.util;
 
 import cn.swallow.platform.config.datasource.MyRoutingDataSource;
+import cn.swallow.platform.core.util.context.SpringContextHolder;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.Connection;

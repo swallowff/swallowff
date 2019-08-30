@@ -4,7 +4,7 @@ import cn.swallow.platform.core.common.log.LogManager;
 import cn.swallow.platform.core.constant.state.LogSucceed;
 import cn.swallow.platform.core.constant.state.LogType;
 import cn.swallow.platform.core.util.CommonUtil;
-import cn.swallow.platform.core.util.SpringContextHolder;
+import cn.swallow.platform.core.util.context.SpringContextHolder;
 import cn.swallow.platform.modular.system.dao.LoginLogMapper;
 import cn.swallow.platform.modular.system.dao.OperationLogMapper;
 import cn.swallow.platform.modular.system.entity.LoginLog;

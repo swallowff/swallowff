@@ -1,6 +1,7 @@
 package cn.swallow.platform.core.util;
 
 import cn.swallow.platform.config.web.RedisConfig;
+import cn.swallow.platform.core.util.context.SpringContextHolder;
 import org.springframework.util.Assert;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
