@@ -21,6 +21,12 @@
         <ehcache.version>3.3.1</ehcache.version>
         <ehcache.core.version>2.6.11</ehcache.core.version>
         <beetl.version>2.9.3</beetl.version>
+        <spring.data.redis.version>1.8.6.RELEASE</spring.data.redis.version>
+        <jedis.version>2.9.0</jedis.version>
+        <druid.version>1.1.10</druid.version>
+        <hutool.version>4.5.1</hutool.version>
+        <common-lang3.version>3.7</common-lang3.version>
+        <httpclient.version>4.5.3</httpclient.version>
     </properties>
 
     <dependencies>
@@ -35,7 +41,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
-            <version>1.8.6.RELEASE</version>
+            <version>${spring.data.redis.version}</version>
         </dependency>
         <!--<dependency>-->
         <!--<groupId>org.springframework.boot</groupId>-->
@@ -72,7 +78,7 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>2.9.0</version>
+            <version>${jedis.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -87,7 +93,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.1.10</version>
+            <version>${druid.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -98,7 +104,7 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-core</artifactId>
-            <version>4.5.1</version>
+            <version>${hutool.version}</version>
         </dependency>
 
         <dependency>
@@ -145,13 +151,13 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
+            <version>${commons-lang3.version}</version>
         </dependency>
         <!--httpclient-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.3</version>
+            <version>${httpclient.version}</version>
         </dependency>
 
 
