@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 adminPath: admin
 apiPath: openApi
@@ -33,6 +33,12 @@ spring:
       prefix: /WEB-INF/view/
       suffix: .html
 
+#logging:
+#  config: classpath:log4j2.xml
+spring.logging:
+  config: classpath:log4j2.xml
+
+
 beetl:
   resource-auto-check: true         #热加载beetl模板，开发时候用
 
@@ -42,12 +48,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
-logging:
-  level:
-    root: dev
-
 spring:
-  profiles: dev
   master-datasource:
     url: jdbc:mysql://localhost:3306/swallow_master?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=CTT
     db-name: swallow_test

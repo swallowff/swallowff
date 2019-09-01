@@ -69,7 +69,7 @@
         <logger name="org.springframework" level="INFO"></logger>
         <logger name="org.mybatis" level="INFO"></logger>
         <logger name="org.apache.http" level="INFO"></logger>
-        <root level="DEBUG">
+        <root level="INFO">
             <appender-ref ref="Console"/>
             <appender-ref ref="RollingFileDebug"/>
             <appender-ref ref="RollingFileInfo"/>

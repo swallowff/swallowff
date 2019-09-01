@@ -33,8 +33,6 @@ spring:
       prefix: /WEB-INF/view/
       suffix: .html
 
-  profiles:
-    active: prod
 #  freemarker:
 #    request-context-attribute: req
 #    suffix: .html
@@ -60,7 +58,6 @@ logging:
     root: info      #日志打印级别
 
 spring:
-  profiles: test
   master-datasource:
     url: jdbc:mysql://localhost:3306/swallow_master?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=CTT
     db-name: swallow_test

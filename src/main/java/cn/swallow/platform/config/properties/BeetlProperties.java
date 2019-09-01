@@ -27,7 +27,7 @@ public class BeetlProperties {
 
     private String resourceAutoCheck;
 
-    @Value("${spring.mvc.view.prefix}")
+//    @Value("${spring.mvc.view.prefix}")
     private String prefix;
 
 
