@@ -1,5 +1,5 @@
 package ${package_name}.entity;
-import cn.swallow.platform.core.common.entity.BaseEntity;
+import cn.swallow.platform.common.base.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.lang.String;
 import java.io.Serializable;

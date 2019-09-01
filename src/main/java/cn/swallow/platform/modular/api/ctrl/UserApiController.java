@@ -2,7 +2,7 @@ package cn.swallow.platform.modular.api.ctrl;
 
 import cn.swallow.platform.common.base.controller.BaseController;
 import cn.swallow.platform.common.base.res.BaseResp;
-import cn.swallow.platform.modular.api.reqresp.UserDto;
+import cn.swallow.platform.modular.system.dto.UserDto;
 import cn.swallow.platform.modular.system.entity.User;
 import cn.swallow.platform.modular.system.service.UserService;
 import io.swagger.annotations.Api;

@@ -41,7 +41,6 @@ public class HttpContext {
                 String paramValue = request.getParameter(paramName);
                 values.put(paramName, paramValue);
             }
-
             return values;
         }
     }
