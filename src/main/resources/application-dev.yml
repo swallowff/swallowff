@@ -32,6 +32,23 @@ spring:
     view:
       prefix: /WEB-INF/view/
       suffix: .html
+  master-datasource:
+    url: jdbc:mysql://localhost:3306/swallow_master?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=CTT
+    db-name: swallow_test
+    username: root
+    password: yanni623..
+    filters: wall,mergeStat
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    slave-datasource:
+      url: jdbc:mysql://localhost:3306/swallow_slave?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=CTT
+      db-name: swallow_test2
+      username: root
+      password: yanni623..
+      filters: wall,mergeStat
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
 
 #logging:
 #  config: classpath:log4j2.xml
@@ -48,22 +65,5 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
-spring:
-  master-datasource:
-    url: jdbc:mysql://localhost:3306/swallow_master?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=CTT
-    db-name: swallow_test
-    username: root
-    password: yanni623..
-    filters: wall,mergeStat
-    driver-class-name: com.mysql.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
 
-  slave-datasource:
-    url: jdbc:mysql://localhost:3306/swallow_slave?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=CTT
-    db-name: swallow_test2
-    username: root
-    password: yanni623..
-    filters: wall,mergeStat
-    driver-class-name: com.mysql.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
 

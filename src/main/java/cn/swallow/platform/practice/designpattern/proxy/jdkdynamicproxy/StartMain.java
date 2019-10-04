@@ -36,4 +36,6 @@ public class StartMain {
         proxyPerson1.say();
         proxyPerson2.say();
     }
+
+
 }
